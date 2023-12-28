@@ -1,0 +1,40 @@
+2023-12-28T12:26:20.485+02:00  INFO 11488 --- [main] c.e.testtasks.TestTasksApplication       : Starting TestTasksApplication using Java 17.0.2 with PID 11488 (C:\Users\legen\Desktop\TestTasks\target\classes started by Andrew in C:\Users\legen\Desktop\TestTasks)
+2023-12-28T12:26:20.497+02:00  INFO 11488 --- [main] c.e.testtasks.TestTasksApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T12:26:23.256+02:00  INFO 11488 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-28T12:26:23.541+02:00  INFO 11488 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 253 ms. Found 2 JPA repository interfaces.
+2023-12-28T12:26:25.241+02:00  INFO 11488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-28T12:26:25.263+02:00  INFO 11488 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-28T12:26:25.263+02:00  INFO 11488 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-28T12:26:25.678+02:00  INFO 11488 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-28T12:26:25.680+02:00  INFO 11488 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4987 ms
+2023-12-28T12:26:26.081+02:00  INFO 11488 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-28T12:26:26.262+02:00  INFO 11488 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-28T12:26:26.421+02:00  INFO 11488 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-28T12:26:27.152+02:00  INFO 11488 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-28T12:26:27.219+02:00  INFO 11488 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T12:26:28.187+02:00  INFO 11488 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4ce267cc
+2023-12-28T12:26:28.191+02:00  INFO 11488 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T12:26:31.407+02:00  INFO 11488 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-28T12:26:31.444+02:00  WARN 11488 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T12:26:31.444+02:00  WARN 11488 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "products" не існує, пропускається
+2023-12-28T12:26:31.445+02:00  WARN 11488 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T12:26:31.446+02:00  WARN 11488 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "registration" не існує, пропускається
+2023-12-28T12:26:31.511+02:00  INFO 11488 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T12:26:32.784+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : Saving user: john
+2023-12-28T12:26:33.228+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : User saved successfully: john
+2023-12-28T12:26:33.279+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : Saving user: jane
+2023-12-28T12:26:33.550+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : User saved successfully: jane
+2023-12-28T12:26:33.556+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : Saving user: admin
+2023-12-28T12:26:33.763+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : User saved successfully: admin
+2023-12-28T12:26:33.768+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : Saving user: moder
+2023-12-28T12:26:34.023+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : User saved successfully: moder
+2023-12-28T12:26:34.028+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : Saving user: umoderator
+2023-12-28T12:26:34.234+02:00  INFO 11488 --- [main] c.e.testtasks.services.UserService       : User saved successfully: umoderator
+2023-12-28T12:26:34.363+02:00  WARN 11488 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-28T12:26:35.000+02:00  INFO 11488 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@112a50a1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6258f9d1, org.springframework.security.web.context.SecurityContextHolderFilter@7402bfe7, org.springframework.security.web.header.HeaderWriterFilter@6277a496, org.springframework.web.filter.CorsFilter@3f31892e, org.springframework.security.web.authentication.logout.LogoutFilter@4806fbf7, com.example.testtasks.security.JWTAuthenticationFilter@45648e75, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5923210, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6a6e410c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@200e6029, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3cd89c72, org.springframework.security.web.session.SessionManagementFilter@42db3ff, org.springframework.security.web.access.ExceptionTranslationFilter@2d399e88, org.springframework.security.web.access.intercept.AuthorizationFilter@44f338ec]
+2023-12-28T12:26:35.327+02:00  WARN 11488 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-28T12:26:35.559+02:00  INFO 11488 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-28T12:26:35.588+02:00  INFO 11488 --- [main] c.e.testtasks.TestTasksApplication       : Started TestTasksApplication in 17.596 seconds (process running for 21.791)
+2023-12-28T12:27:13.388+02:00  INFO 11488 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T12:27:13.417+02:00  INFO 11488 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T12:27:13.735+02:00  INFO 11488 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
