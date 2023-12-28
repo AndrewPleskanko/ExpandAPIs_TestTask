@@ -4,6 +4,9 @@ import com.example.testtasks.dto.ProductDTO;
 import com.example.testtasks.entity.Product;
 import com.example.testtasks.repositories.ProductRepository;
 import com.example.testtasks.services.interfaces.ProductServiceImp;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service for working with products.
+ */
 @Service
 public class ProductService implements ProductServiceImp {
     private static final Logger logger = LogManager.getLogger();
@@ -25,6 +31,16 @@ public class ProductService implements ProductServiceImp {
     @Autowired
     private ProductRepository productRepository;
 
+    /**
+     * Save products.
+     *
+     * @param request DTO for saving products.
+     */
+    @ApiOperation(value = "Save products")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Products saved successfully"),
+            @ApiResponse(code = 500, message = "Error saving products")
+    })
     @Override
     public void saveProducts(ProductDTO request) {
         try {
@@ -38,6 +54,16 @@ public class ProductService implements ProductServiceImp {
         }
     }
 
+    /**
+     * Retrieve all products.
+     *
+     * @return List of products.
+     */
+    @ApiOperation(value = "Retrieve all products")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Products retrieved successfully"),
+            @ApiResponse(code = 500, message = "Error retrieving products")
+    })
     @Override
     public List<Product> getAllProducts() {
         try {

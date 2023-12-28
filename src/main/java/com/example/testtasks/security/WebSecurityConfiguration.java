@@ -27,6 +27,8 @@ public class WebSecurityConfiguration {
     private final UserDetailsServiceImplementation userDetailsService;
     private final JwtAuthEntryPoint authEntryPoint;
 
+    private static final String CONFIGURATION_MESSAGE = "Configuring Security Filter Chain";
+
     @Autowired
     public WebSecurityConfiguration(UserDetailsServiceImplementation userDetailsService, JwtAuthEntryPoint authEntryPoint) {
         this.userDetailsService = userDetailsService;
@@ -35,6 +37,7 @@ public class WebSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        logger.info(CONFIGURATION_MESSAGE);
         http
                 .formLogin(
                         login -> login

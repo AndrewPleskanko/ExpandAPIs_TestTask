@@ -18,7 +18,9 @@ public class JWTGenerator {
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     private static final Logger logger = LogManager.getLogger();
     private static final String JWT_EXPIRATION_ERROR_MESSAGE = "JWT was expired or incorrect";
-
+    private static final String TOKEN_GENERATION_MESSAGE = "Generating token for user: {}";
+    private static final String TOKEN_VALIDATION_MESSAGE = "Validating token: {}";
+    private static final String USERNAME_EXTRACTION_MESSAGE = "Extracting username from JWT: {}";
 
     public String generateToken(Authentication authentication) {
         String username = authentication.getName();
@@ -31,8 +33,7 @@ public class JWTGenerator {
                 .setExpiration(expireDate)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
-        System.out.println("New token :");
-        System.out.println(token);
+        logger.info(TOKEN_GENERATION_MESSAGE, username);
         return token;
     }
 
@@ -42,15 +43,22 @@ public class JWTGenerator {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        return claims.getSubject();
+        String username = claims.getSubject();
+        logger.info(USERNAME_EXTRACTION_MESSAGE, username);
+        return username;
     }
 
     public boolean validateToken(String token) {
-        Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token);
-        return true;
+        try {
+            logger.info(TOKEN_VALIDATION_MESSAGE, token);
+            Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            logger.error(JWT_EXPIRATION_ERROR_MESSAGE, e);
+            return false;
+        }
     }
-
 }

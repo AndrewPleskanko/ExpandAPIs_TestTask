@@ -27,22 +27,6 @@ public class DefaultDataConfig {
         janeRequest.setUsername("jane");
         janeRequest.setPassword("123");
         userService.saveUser(janeRequest);
-
-        UserDTO adminRequest = new UserDTO();
-        adminRequest.setUsername("admin");
-        adminRequest.setPassword("admin");
-
-        userService.saveUser(adminRequest);
-
-        UserDTO moderRequest = new UserDTO();
-        moderRequest.setUsername("moder");
-        moderRequest.setPassword("moder");
-        userService.saveUser(moderRequest);
-
-        UserDTO umoderatorRequest = new UserDTO();
-        umoderatorRequest.setUsername("umoderator");
-        umoderatorRequest.setPassword("12345");
-        userService.saveUser(umoderatorRequest);
     }
 }
 

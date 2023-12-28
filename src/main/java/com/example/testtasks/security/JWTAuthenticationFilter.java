@@ -16,7 +16,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_TOKEN_PREFIX = "Bearer ";
     private static final Logger logger = LogManager.getLogger();

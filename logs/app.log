@@ -38,3 +38,267 @@
 2023-12-28T12:27:13.388+02:00  INFO 11488 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-12-28T12:27:13.417+02:00  INFO 11488 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-12-28T12:27:13.735+02:00  INFO 11488 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T13:42:02.376+02:00  INFO 1500 --- [main] c.e.testtasks.TestTasksApplication       : Starting TestTasksApplication using Java 21 with PID 1500 (C:\Users\legen\Desktop\TestTasks\target\classes started by Andrew in C:\Users\legen\Desktop\TestTasks)
+2023-12-28T13:42:02.381+02:00  INFO 1500 --- [main] c.e.testtasks.TestTasksApplication       : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T13:42:05.860+02:00  INFO 1500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-28T13:42:06.108+02:00  INFO 1500 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 220 ms. Found 2 JPA repository interfaces.
+2023-12-28T13:42:10.112+02:00  INFO 1500 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2023-12-28T13:42:10.187+02:00  INFO 1500 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-28T13:42:10.193+02:00  INFO 1500 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2023-12-28T13:42:10.515+02:00  INFO 1500 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-28T13:42:10.516+02:00  INFO 1500 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7955 ms
+2023-12-28T13:42:11.183+02:00  INFO 1500 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-28T13:42:11.365+02:00  INFO 1500 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-28T13:42:11.517+02:00  INFO 1500 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-28T13:42:12.758+02:00  INFO 1500 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-28T13:42:12.832+02:00  INFO 1500 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T13:42:13.457+02:00  INFO 1500 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5d5d3a5c
+2023-12-28T13:42:13.462+02:00  INFO 1500 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T13:42:16.241+02:00  INFO 1500 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-28T13:42:16.296+02:00  WARN 1500 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T13:42:16.297+02:00  WARN 1500 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "products" не існує, пропускається
+2023-12-28T13:42:16.299+02:00  WARN 1500 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T13:42:16.300+02:00  WARN 1500 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "registration" не існує, пропускається
+2023-12-28T13:42:16.367+02:00  INFO 1500 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T13:42:17.261+02:00  INFO 1500 --- [main] c.e.testtasks.services.UserService       : Saving user: john
+2023-12-28T13:42:17.474+02:00  INFO 1500 --- [main] c.e.testtasks.services.UserService       : User saved successfully: john
+2023-12-28T13:42:17.493+02:00  INFO 1500 --- [main] c.e.testtasks.services.UserService       : Saving user: jane
+2023-12-28T13:42:17.624+02:00  INFO 1500 --- [main] c.e.testtasks.services.UserService       : User saved successfully: jane
+2023-12-28T13:42:17.758+02:00  WARN 1500 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-28T13:42:18.175+02:00  INFO 1500 --- [main] c.e.t.security.WebSecurityConfiguration  : Configuring Security Filter Chain
+2023-12-28T13:42:18.235+02:00  INFO 1500 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@34f32575, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@54224125, org.springframework.security.web.context.SecurityContextHolderFilter@15a5cc6e, org.springframework.security.web.header.HeaderWriterFilter@7575f7e1, org.springframework.web.filter.CorsFilter@7c013560, org.springframework.security.web.authentication.logout.LogoutFilter@8a7cd7c, com.example.testtasks.security.JWTAuthenticationFilter@7491cdae, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@39a09c0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4fc84c92, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5f7bd970, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@feab3ae, org.springframework.security.web.session.SessionManagementFilter@2396408a, org.springframework.security.web.access.ExceptionTranslationFilter@7dd2a5f7, org.springframework.security.web.access.intercept.AuthorizationFilter@3a225534]
+2023-12-28T13:42:18.481+02:00  WARN 1500 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-28T13:42:18.775+02:00  INFO 1500 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2023-12-28T13:42:18.794+02:00  INFO 1500 --- [main] c.e.testtasks.TestTasksApplication       : Started TestTasksApplication in 19.402 seconds (process running for 24.215)
+2023-12-28T13:42:26.709+02:00  INFO 1500 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-28T13:42:26.710+02:00  INFO 1500 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-28T13:42:26.712+02:00  INFO 1500 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-12-28T13:42:26.758+02:00  INFO 1500 --- [http-nio-8080-exec-2] c.e.testtasks.security.JWTGenerator      : Validating token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzAzNzU5MDUwLCJleHAiOjE3MDM3NjYwNTB9.nEQatrvsju24C2KOcGvpVnncQ3IHqYb-U8OA4IjAUL_QUtDNNACsEYugScM6phsD7Ht712pKm7snIKuaIjXzWg
+2023-12-28T13:42:26.864+02:00 ERROR 1500 --- [http-nio-8080-exec-2] c.e.testtasks.security.JWTGenerator      : JWT was expired or incorrect
+
+io.jsonwebtoken.security.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:399) ~[jjwt-impl-0.11.5.jar:0.11.5]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529) ~[jjwt-impl-0.11.5.jar:0.11.5]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589) ~[jjwt-impl-0.11.5.jar:0.11.5]
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173) ~[jjwt-impl-0.11.5.jar:0.11.5]
+	at com.example.testtasks.security.JWTGenerator.validateToken(JWTGenerator.java:57) ~[classes/:na]
+	at com.example.testtasks.security.JWTAuthenticationFilter.doFilterInternal(JWTAuthenticationFilter.java:38) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:225) ~[spring-security-config-6.2.1.jar:6.2.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.2.jar:6.1.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.17.jar:10.1.17]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2023-12-28T13:42:26.893+02:00 ERROR 1500 --- [http-nio-8080-exec-2] c.e.t.security.JwtAuthEntryPoint         : Authentication failed: Full authentication is required to access this resource
+2023-12-28T13:42:26.907+02:00 ERROR 1500 --- [http-nio-8080-exec-2] c.e.t.security.JwtAuthEntryPoint         : Authentication failed: Full authentication is required to access this resource
+2023-12-28T13:42:32.558+02:00  INFO 1500 --- [http-nio-8080-exec-3] c.e.testtasks.services.UserService       : Saving user: sina
+2023-12-28T13:42:32.699+02:00  INFO 1500 --- [http-nio-8080-exec-3] c.e.testtasks.services.UserService       : User saved successfully: sina
+2023-12-28T13:42:32.707+02:00  INFO 1500 --- [http-nio-8080-exec-3] c.e.t.controllers.LogInController        : User added: sina
+2023-12-28T13:42:36.112+02:00  INFO 1500 --- [http-nio-8080-exec-4] c.e.t.controllers.LogInController        : Received authentication request for user: john
+2023-12-28T13:42:36.114+02:00  INFO 1500 --- [http-nio-8080-exec-4] c.e.t.s.UserDetailsServiceImplementation : Attempting to load user by username: john
+2023-12-28T13:42:36.359+02:00  INFO 1500 --- [http-nio-8080-exec-4] c.e.t.s.UserDetailsServiceImplementation : User loaded successfully: john
+2023-12-28T13:42:36.585+02:00  INFO 1500 --- [http-nio-8080-exec-4] t.s.AuthenticationProviderImplementation : Authentication successful for user: john
+2023-12-28T13:42:36.678+02:00  INFO 1500 --- [http-nio-8080-exec-4] c.e.testtasks.security.JWTGenerator      : Generating token for user: john
+2023-12-28T13:42:36.678+02:00  INFO 1500 --- [http-nio-8080-exec-4] c.e.t.controllers.LogInController        : Generated token for user: john
+2023-12-28T13:42:47.800+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.testtasks.security.JWTGenerator      : Validating token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzAzNzYzNzU2LCJleHAiOjE3MDM3NzA3NTZ9.gC23e14mCWbNCBNEwRffTXillT0vbEiYRjQjB6_eQegBCNxzo37HO_mYrrqOl4ijTXiwVg7FQul1Yv43cx9ttQ
+2023-12-28T13:42:47.811+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.testtasks.security.JWTGenerator      : Extracting username from JWT: john
+2023-12-28T13:42:47.812+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.t.s.UserDetailsServiceImplementation : Attempting to load user by username: john
+2023-12-28T13:42:47.814+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.t.s.UserDetailsServiceImplementation : User loaded successfully: john
+2023-12-28T13:42:47.815+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.t.security.JWTAuthenticationFilter   : Authentication successful for user: john
+2023-12-28T13:42:47.833+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.t.controllers.ProductController      : Entering addProducts method
+2023-12-28T13:42:47.840+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.testtasks.services.ProductService    : Saving products: [Product(id=null, entryDate=Tue Jan 03 02:00:00 EET 2023, itemCode=11111, itemName=Fina Lika, itemQuantity=30, status=Paid), Product(id=null, entryDate=Tue Jan 03 02:00:00 EET 2023, itemCode=11111, itemName=Test Inventory 2, itemQuantity=20, status=Paid)]
+2023-12-28T13:42:47.857+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.testtasks.services.ProductService    : Products saved successfully
+2023-12-28T13:42:47.857+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.t.controllers.ProductController      : Records saved successfully
+2023-12-28T13:42:47.857+02:00  INFO 1500 --- [http-nio-8080-exec-5] c.e.t.controllers.ProductController      : Exiting addProducts method
+2023-12-28T13:43:03.615+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.testtasks.security.JWTGenerator      : Validating token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huIiwiaWF0IjoxNzAzNzYzNzU2LCJleHAiOjE3MDM3NzA3NTZ9.gC23e14mCWbNCBNEwRffTXillT0vbEiYRjQjB6_eQegBCNxzo37HO_mYrrqOl4ijTXiwVg7FQul1Yv43cx9ttQ
+2023-12-28T13:43:03.629+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.testtasks.security.JWTGenerator      : Extracting username from JWT: john
+2023-12-28T13:43:03.630+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.t.s.UserDetailsServiceImplementation : Attempting to load user by username: john
+2023-12-28T13:43:03.636+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.t.s.UserDetailsServiceImplementation : User loaded successfully: john
+2023-12-28T13:43:03.639+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.t.security.JWTAuthenticationFilter   : Authentication successful for user: john
+2023-12-28T13:43:03.641+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.t.controllers.ProductController      : Entering getAllProducts method
+2023-12-28T13:43:03.642+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.testtasks.services.ProductService    : Retrieving all products
+2023-12-28T13:43:03.667+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.testtasks.services.ProductService    : Products retrieved successfully
+2023-12-28T13:43:03.667+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.t.controllers.ProductController      : Retrieved all products
+2023-12-28T13:43:03.667+02:00  INFO 1500 --- [http-nio-8080-exec-6] c.e.t.controllers.ProductController      : Exiting getAllProducts method
+2023-12-28T13:46:31.794+02:00  INFO 17788 --- [main] com.example.testtasks.UserServiceTest    : Starting UserServiceTest using Java 21 with PID 17788 (started by Andrew in C:\Users\legen\Desktop\TestTasks)
+2023-12-28T13:46:31.798+02:00  INFO 17788 --- [main] com.example.testtasks.UserServiceTest    : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T13:46:34.968+02:00  INFO 17788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-28T13:46:35.183+02:00  INFO 17788 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 185 ms. Found 2 JPA repository interfaces.
+2023-12-28T13:46:37.489+02:00  INFO 17788 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-28T13:46:37.836+02:00  INFO 17788 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-28T13:46:38.030+02:00  INFO 17788 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-28T13:46:39.586+02:00  INFO 17788 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-28T13:46:39.764+02:00  INFO 17788 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T13:46:40.790+02:00  INFO 17788 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@76af51d6
+2023-12-28T13:46:40.797+02:00  INFO 17788 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T13:46:45.249+02:00  INFO 17788 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-28T13:46:45.390+02:00  INFO 17788 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T13:46:46.786+02:00  INFO 17788 --- [main] c.e.testtasks.services.UserService       : Saving user: john
+2023-12-28T13:46:47.103+02:00  INFO 17788 --- [main] c.e.testtasks.services.UserService       : User saved successfully: john
+2023-12-28T13:46:47.133+02:00  INFO 17788 --- [main] c.e.testtasks.services.UserService       : Saving user: jane
+2023-12-28T13:46:47.257+02:00  INFO 17788 --- [main] c.e.testtasks.services.UserService       : User saved successfully: jane
+2023-12-28T13:46:47.521+02:00  WARN 17788 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-28T13:46:48.689+02:00  INFO 17788 --- [main] c.e.t.security.WebSecurityConfiguration  : Configuring Security Filter Chain
+2023-12-28T13:46:48.844+02:00  INFO 17788 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@c7d173f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@12f12744, org.springframework.security.web.context.SecurityContextHolderFilter@6e627ab8, org.springframework.security.web.header.HeaderWriterFilter@1d7f0cd0, org.springframework.web.filter.CorsFilter@1c618295, org.springframework.security.web.authentication.logout.LogoutFilter@2f09907, com.example.testtasks.security.JWTAuthenticationFilter@3b72860c, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@31885b4b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@496004e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@df34b01, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@344acc03, org.springframework.security.web.session.SessionManagementFilter@113e6e06, org.springframework.security.web.access.ExceptionTranslationFilter@787b7796, org.springframework.security.web.access.intercept.AuthorizationFilter@36570936]
+2023-12-28T13:46:49.751+02:00  WARN 17788 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-28T13:46:50.084+02:00  INFO 17788 --- [main] com.example.testtasks.UserServiceTest    : Started UserServiceTest in 19.415 seconds (process running for 24.533)
+2023-12-28T13:46:53.440+02:00  INFO 17788 --- [main] c.e.testtasks.services.UserService       : Saving user: testUser
+2023-12-28T13:46:53.446+02:00  INFO 17788 --- [main] c.e.testtasks.services.UserService       : User saved successfully: testUser
+2023-12-28T13:46:53.652+02:00  INFO 17788 --- [main] c.e.testtasks.services.UserService       : Fetching user by ID: 1
+2023-12-28T13:46:53.752+02:00  INFO 17788 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T13:46:53.794+02:00  INFO 17788 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T13:46:54.550+02:00  INFO 17788 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T14:18:18.296+02:00  INFO 16924 --- [main] c.example.testtasks.ProductServiceTest   : Starting ProductServiceTest using Java 21 with PID 16924 (started by Andrew in C:\Users\legen\Desktop\TestTasks)
+2023-12-28T14:18:18.299+02:00  INFO 16924 --- [main] c.example.testtasks.ProductServiceTest   : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T14:18:20.578+02:00  INFO 16924 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-28T14:18:20.758+02:00  INFO 16924 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 149 ms. Found 2 JPA repository interfaces.
+2023-12-28T14:18:22.335+02:00  INFO 16924 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-28T14:18:22.546+02:00  INFO 16924 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-28T14:18:22.677+02:00  INFO 16924 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-28T14:18:23.589+02:00  INFO 16924 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-28T14:18:23.668+02:00  INFO 16924 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T14:18:24.303+02:00  INFO 16924 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@749baa0c
+2023-12-28T14:18:24.309+02:00  INFO 16924 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T14:18:27.549+02:00  INFO 16924 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-28T14:18:27.621+02:00  WARN 16924 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T14:18:27.626+02:00  WARN 16924 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "products" не існує, пропускається
+2023-12-28T14:18:27.628+02:00  WARN 16924 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T14:18:27.629+02:00  WARN 16924 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "registration" не існує, пропускається
+2023-12-28T14:18:27.685+02:00  INFO 16924 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T14:18:28.961+02:00  INFO 16924 --- [main] c.e.testtasks.services.UserService       : Saving user: john
+2023-12-28T14:18:29.201+02:00  INFO 16924 --- [main] c.e.testtasks.services.UserService       : User saved successfully: john
+2023-12-28T14:18:29.218+02:00  INFO 16924 --- [main] c.e.testtasks.services.UserService       : Saving user: jane
+2023-12-28T14:18:29.322+02:00  INFO 16924 --- [main] c.e.testtasks.services.UserService       : User saved successfully: jane
+2023-12-28T14:18:29.586+02:00  WARN 16924 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-28T14:18:30.378+02:00  INFO 16924 --- [main] c.e.t.security.WebSecurityConfiguration  : Configuring Security Filter Chain
+2023-12-28T14:18:30.506+02:00  INFO 16924 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@52a9db63, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@402d76c7, org.springframework.security.web.context.SecurityContextHolderFilter@2c6d442d, org.springframework.security.web.header.HeaderWriterFilter@57063e08, org.springframework.web.filter.CorsFilter@27adb90f, org.springframework.security.web.authentication.logout.LogoutFilter@34c2e03d, com.example.testtasks.security.JWTAuthenticationFilter@67cd193d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6f986031, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@227c0cf7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13cc3984, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1fd77205, org.springframework.security.web.session.SessionManagementFilter@272f5373, org.springframework.security.web.access.ExceptionTranslationFilter@7207f3c2, org.springframework.security.web.access.intercept.AuthorizationFilter@45a4587d]
+2023-12-28T14:18:31.212+02:00  WARN 16924 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-28T14:18:31.461+02:00  INFO 16924 --- [main] c.example.testtasks.ProductServiceTest   : Started ProductServiceTest in 13.897 seconds (process running for 17.778)
+2023-12-28T14:18:34.639+02:00  INFO 16924 --- [main] c.e.testtasks.services.ProductService    : Saving products: [Product(id=1, entryDate=null, itemCode=11111, itemName=Fina Lika, itemQuantity=30, status=Paid), Product(id=2, entryDate=null, itemCode=11111, itemName=Test Inventory 2, itemQuantity=20, status=Paid)]
+2023-12-28T14:18:34.663+02:00  INFO 16924 --- [main] c.e.testtasks.services.ProductService    : Products saved successfully
+2023-12-28T14:18:34.796+02:00  INFO 16924 --- [main] c.e.testtasks.services.ProductService    : Retrieving all products
+2023-12-28T14:18:34.797+02:00  INFO 16924 --- [main] c.e.testtasks.services.ProductService    : Products retrieved successfully
+2023-12-28T14:18:34.896+02:00  INFO 16924 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T14:18:34.936+02:00  INFO 16924 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T14:18:35.834+02:00  INFO 16924 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T14:22:36.331+02:00  INFO 8668 --- [main] c.example.testtasks.ProductServiceTest   : Starting ProductServiceTest using Java 21 with PID 8668 (started by Andrew in C:\Users\legen\Desktop\TestTasks)
+2023-12-28T14:22:36.335+02:00  INFO 8668 --- [main] c.example.testtasks.ProductServiceTest   : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T14:22:42.184+02:00  INFO 8668 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-28T14:22:42.456+02:00  INFO 8668 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 233 ms. Found 2 JPA repository interfaces.
+2023-12-28T14:22:50.947+02:00  INFO 8668 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-28T14:22:51.952+02:00  INFO 8668 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-28T14:22:52.669+02:00  INFO 8668 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-28T14:22:55.238+02:00  INFO 8668 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-28T14:22:55.433+02:00  INFO 8668 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T14:22:57.722+02:00  INFO 8668 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@283a8ad6
+2023-12-28T14:22:57.729+02:00  INFO 8668 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T14:23:05.679+02:00  INFO 8668 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-28T14:23:05.989+02:00  WARN 8668 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T14:23:05.995+02:00  WARN 8668 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "products" не існує, пропускається
+2023-12-28T14:23:05.998+02:00  WARN 8668 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T14:23:05.999+02:00  WARN 8668 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "registration" не існує, пропускається
+2023-12-28T14:23:06.095+02:00  INFO 8668 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T14:23:10.550+02:00  INFO 8668 --- [main] c.e.testtasks.services.UserService       : Saving user: john
+2023-12-28T14:23:11.038+02:00  INFO 8668 --- [main] c.e.testtasks.services.UserService       : User saved successfully: john
+2023-12-28T14:23:11.063+02:00  INFO 8668 --- [main] c.e.testtasks.services.UserService       : Saving user: jane
+2023-12-28T14:23:11.262+02:00  INFO 8668 --- [main] c.e.testtasks.services.UserService       : User saved successfully: jane
+2023-12-28T14:23:11.816+02:00  WARN 8668 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-28T14:23:14.404+02:00  INFO 8668 --- [main] c.e.t.security.WebSecurityConfiguration  : Configuring Security Filter Chain
+2023-12-28T14:23:14.978+02:00  INFO 8668 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1f05d08c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2c6d442d, org.springframework.security.web.context.SecurityContextHolderFilter@5608e254, org.springframework.security.web.header.HeaderWriterFilter@4e9d203e, org.springframework.web.filter.CorsFilter@71842e18, org.springframework.security.web.authentication.logout.LogoutFilter@2fcad739, com.example.testtasks.security.JWTAuthenticationFilter@235dacd7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1cb73a92, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@45cddfd3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@40dc2ade, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@227c0cf7, org.springframework.security.web.session.SessionManagementFilter@5687ade6, org.springframework.security.web.access.ExceptionTranslationFilter@4d145177, org.springframework.security.web.access.intercept.AuthorizationFilter@272f5373]
+2023-12-28T14:23:17.305+02:00  WARN 8668 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-28T14:23:17.838+02:00  INFO 8668 --- [main] c.example.testtasks.ProductServiceTest   : Started ProductServiceTest in 45.131 seconds (process running for 58.702)
+2023-12-28T14:23:23.599+02:00  INFO 8668 --- [main] c.e.testtasks.services.ProductService    : Saving products: [Product(id=1, entryDate=null, itemCode=11111, itemName=Fina Lika, itemQuantity=30, status=Paid), Product(id=2, entryDate=null, itemCode=11111, itemName=Test Inventory 2, itemQuantity=20, status=Paid)]
+2023-12-28T14:23:23.647+02:00  INFO 8668 --- [main] c.e.testtasks.services.ProductService    : Products saved successfully
+2023-12-28T14:23:24.106+02:00  INFO 8668 --- [main] c.e.testtasks.services.ProductService    : Retrieving all products
+2023-12-28T14:23:24.113+02:00  INFO 8668 --- [main] c.e.testtasks.services.ProductService    : Products retrieved successfully
+2023-12-28T14:23:24.220+02:00  INFO 8668 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T14:23:24.368+02:00  INFO 8668 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T14:23:25.313+02:00  INFO 8668 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-12-28T14:29:55.465+02:00  INFO 18180 --- [main] c.example.testtasks.ProductServiceTest   : Starting ProductServiceTest using Java 21 with PID 18180 (started by Andrew in C:\Users\legen\Desktop\TestTasks)
+2023-12-28T14:29:55.470+02:00  INFO 18180 --- [main] c.example.testtasks.ProductServiceTest   : No active profile set, falling back to 1 default profile: "default"
+2023-12-28T14:29:58.950+02:00  INFO 18180 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-12-28T14:29:59.179+02:00  INFO 18180 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 197 ms. Found 2 JPA repository interfaces.
+2023-12-28T14:30:01.614+02:00  INFO 18180 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-12-28T14:30:02.169+02:00  INFO 18180 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2023-12-28T14:30:02.332+02:00  INFO 18180 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2023-12-28T14:30:03.820+02:00  INFO 18180 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-12-28T14:30:03.984+02:00  INFO 18180 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-12-28T14:30:05.261+02:00  INFO 18180 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6caeba36
+2023-12-28T14:30:05.268+02:00  INFO 18180 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-12-28T14:30:11.134+02:00  INFO 18180 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2023-12-28T14:30:11.218+02:00  WARN 18180 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T14:30:11.219+02:00  WARN 18180 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "products" не існує, пропускається
+2023-12-28T14:30:11.223+02:00  WARN 18180 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2023-12-28T14:30:11.224+02:00  WARN 18180 --- [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : таблиця "registration" не існує, пропускається
+2023-12-28T14:30:11.295+02:00  INFO 18180 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T14:30:13.105+02:00  INFO 18180 --- [main] c.e.testtasks.services.UserService       : Saving user: john
+2023-12-28T14:30:13.519+02:00  INFO 18180 --- [main] c.e.testtasks.services.UserService       : User saved successfully: john
+2023-12-28T14:30:13.559+02:00  INFO 18180 --- [main] c.e.testtasks.services.UserService       : Saving user: jane
+2023-12-28T14:30:13.729+02:00  INFO 18180 --- [main] c.e.testtasks.services.UserService       : User saved successfully: jane
+2023-12-28T14:30:14.297+02:00  WARN 18180 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-12-28T14:30:15.831+02:00  INFO 18180 --- [main] c.e.t.security.WebSecurityConfiguration  : Configuring Security Filter Chain
+2023-12-28T14:30:16.097+02:00  INFO 18180 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@9da386c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@492a220e, org.springframework.security.web.context.SecurityContextHolderFilter@5c8d685e, org.springframework.security.web.header.HeaderWriterFilter@3b1a3125, org.springframework.web.filter.CorsFilter@5f5fb335, org.springframework.security.web.authentication.logout.LogoutFilter@4ae435a3, com.example.testtasks.security.JWTAuthenticationFilter@21a462ce, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7ff40324, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4d0e6424, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6da86e98, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@715d82a0, org.springframework.security.web.session.SessionManagementFilter@3ca564aa, org.springframework.security.web.access.ExceptionTranslationFilter@5fa3df, org.springframework.security.web.access.intercept.AuthorizationFilter@70fcd3e5]
+2023-12-28T14:30:17.420+02:00  WARN 18180 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-12-28T14:30:17.932+02:00  INFO 18180 --- [main] c.example.testtasks.ProductServiceTest   : Started ProductServiceTest in 24.32 seconds (process running for 32.888)
+2023-12-28T14:30:21.282+02:00  INFO 18180 --- [main] c.e.testtasks.services.ProductService    : Saving products: [Product(id=1, entryDate=Tue Jan 03 00:00:00 EET 2023, itemCode=11111, itemName=Fina Lika, itemQuantity=30, status=Paid), Product(id=2, entryDate=Tue Jan 03 00:00:00 EET 2023, itemCode=11111, itemName=Test Inventory 2, itemQuantity=20, status=Paid)]
+2023-12-28T14:30:21.295+02:00  INFO 18180 --- [main] c.e.testtasks.services.ProductService    : Products saved successfully
+2023-12-28T14:30:21.366+02:00  INFO 18180 --- [main] c.e.testtasks.services.ProductService    : Retrieving all products
+2023-12-28T14:30:21.368+02:00  INFO 18180 --- [main] c.e.testtasks.services.ProductService    : Products retrieved successfully
+2023-12-28T14:30:21.412+02:00  INFO 18180 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-12-28T14:30:21.461+02:00  INFO 18180 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-12-28T14:30:21.835+02:00  INFO 18180 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -6,7 +6,6 @@ import com.example.testtasks.entity.Product;
 import java.util.List;
 
 public interface ProductServiceImp {
-
     void saveProducts(ProductDTO request);
     List<Product> getAllProducts();
 }

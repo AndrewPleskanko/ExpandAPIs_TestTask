@@ -1,6 +1,5 @@
 package com.example.testtasks.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,6 +7,8 @@ import java.util.Date;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "products")
 public class Product {
 
@@ -30,4 +31,5 @@ public class Product {
 
     @Column(name = "status")
     private String status;
+
 }

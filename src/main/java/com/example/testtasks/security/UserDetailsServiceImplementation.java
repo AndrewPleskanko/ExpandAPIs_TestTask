@@ -19,9 +19,11 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImplementation implements UserDetailsService {
     final private UserRepository userRepository;
+    private static final Logger logger = LogManager.getLogger();
 
-    private final static String USER_NOT_FOUND_MSG =
-            "user with username %s not found";
+    private final static String USER_NOT_FOUND_MSG = "user with username %s not found";
+    private static final String USER_LOADED_SUCCESSFULLY_MSG = "User loaded successfully: {}";
+    private static final String ATTEMPTING_TO_LOAD_USER_MSG = "Attempting to load user by username: {}";
 
     @Autowired
     public UserDetailsServiceImplementation (UserRepository userRepository) {
@@ -31,8 +33,11 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        logger.info(ATTEMPTING_TO_LOAD_USER_MSG, username);
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG,username)));
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        logger.info(USER_LOADED_SUCCESSFULLY_MSG, username);
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }
