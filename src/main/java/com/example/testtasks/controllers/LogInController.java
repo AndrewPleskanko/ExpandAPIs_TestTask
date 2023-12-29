@@ -2,13 +2,13 @@ package com.example.testtasks.controllers;
 
 import com.example.testtasks.dto.AuthResponseDTO;
 import com.example.testtasks.dto.UserDTO;
+import com.example.testtasks.handler.GlobalExceptionHandler;
 import com.example.testtasks.security.AuthenticationProviderImplementation;
 import com.example.testtasks.security.JWTGenerator;
-import com.example.testtasks.services.UserService;
+import com.example.testtasks.services.UserServiceImp;
 import io.swagger.annotations.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,27 +19,20 @@ import org.springframework.web.bind.annotation.*;
 /**
  * A controller for working with users
  */
+@Slf4j
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @Api(value = "User Controller", tags = "User Controller", description = "REST API for managing users")
+@RequiredArgsConstructor
 public class LogInController {
-    private static final Logger logger = LogManager.getLogger();
     private final AuthenticationProviderImplementation authenticationProvider;
     private final JWTGenerator tokenGenerator;
-    private final UserService userService;
+    private final UserServiceImp userService;
+    private final GlobalExceptionHandler globalExceptionHandler;
 
     private static final String AUTHENTICATION_REQUEST_RECEIVED = "Received authentication request for user: ";
     private static final String TOKEN_GENERATED_FOR_USER = "Generated token for user: ";
     private static final String USER_ADDED = "User added: ";
-    private static final String ERROR_ADDING_USER = "Error adding user: ";
-    private static final String AUTHENTICATION_FAILED = "Authentication failed: ";
-
-    @Autowired
-    public LogInController(AuthenticationProviderImplementation authenticationProvider, JWTGenerator tokenGenerator, UserService userService) {
-        this.authenticationProvider = authenticationProvider;
-        this.tokenGenerator = tokenGenerator;
-        this.userService = userService;
-    }
 
     /**
      * Authenticates a user and generates a JWT token.
@@ -55,19 +48,18 @@ public class LogInController {
     })
     public ResponseEntity<AuthResponseDTO> authenticate(@RequestBody UserDTO userSignUpRequest) {
         try {
-            logger.info(AUTHENTICATION_REQUEST_RECEIVED + userSignUpRequest.getUsername());
+            log.info(AUTHENTICATION_REQUEST_RECEIVED + userSignUpRequest.getUsername());
 
             Authentication auth = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(
                     userSignUpRequest.getUsername(),
                     userSignUpRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(auth);
             String token = tokenGenerator.generateToken(auth);
-            logger.info(TOKEN_GENERATED_FOR_USER + userSignUpRequest.getUsername());
+            log.info(TOKEN_GENERATED_FOR_USER + userSignUpRequest.getUsername());
             return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
         } catch (Exception e) {
-            logger.error(AUTHENTICATION_FAILED + e.getMessage(), e);
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            AuthResponseDTO authResponseDTO = new AuthResponseDTO(globalExceptionHandler.handleStringException(e).getBody());
+            return new ResponseEntity<>(authResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -86,11 +78,10 @@ public class LogInController {
     public ResponseEntity<String> add(@RequestBody UserDTO userSignUpRequest) {
         try {
             userService.saveUser(userSignUpRequest);
-            logger.info(USER_ADDED + userSignUpRequest.getUsername());
+            log.info(USER_ADDED + userSignUpRequest.getUsername());
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            logger.error(ERROR_ADDING_USER + e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return globalExceptionHandler.handleStringException(e);
         }
     }
 }

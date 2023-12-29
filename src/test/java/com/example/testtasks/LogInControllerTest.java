@@ -5,7 +5,6 @@ import com.example.testtasks.dto.AuthResponseDTO;
 import com.example.testtasks.dto.UserDTO;
 import com.example.testtasks.security.AuthenticationProviderImplementation;
 import com.example.testtasks.security.JWTGenerator;
-import com.example.testtasks.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,9 +25,6 @@ public class LogInControllerTest {
 
     @Mock
     private JWTGenerator tokenGenerator;
-
-    @Mock
-    private UserService userService;
 
     @InjectMocks
     private LogInController logInController;

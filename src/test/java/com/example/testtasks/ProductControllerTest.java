@@ -3,17 +3,17 @@ package com.example.testtasks;
 import com.example.testtasks.controllers.ProductController;
 import com.example.testtasks.dto.ProductDTO;
 import com.example.testtasks.entity.Product;
-import com.example.testtasks.services.ProductService;
+import com.example.testtasks.services.ProductServiceImp;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import java.util.Collections;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 public class ProductControllerTest {
 
     @Mock
-    private ProductService productService;
+    private ProductServiceImp productService;
 
     @InjectMocks
     private ProductController productController;

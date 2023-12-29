@@ -1,7 +1,7 @@
-package  com.example.testtasks.config;
+package com.example.testtasks.config;
 
-import  com.example.testtasks.dto.UserDTO;
-import  com.example.testtasks.services.interfaces.UserServiceImp;
+import com.example.testtasks.dto.UserDTO;
+import com.example.testtasks.services.interfaces.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DefaultDataConfig {
 
-    private UserServiceImp userService;
+    private UserService userService;
 
     @Autowired
-    public DefaultDataConfig(UserServiceImp userService) {
+    public DefaultDataConfig(UserService userService) {
         this.userService = userService;
     }
 

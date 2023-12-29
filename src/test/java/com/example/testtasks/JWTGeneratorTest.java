@@ -1,4 +1,5 @@
 package com.example.testtasks;
+
 import com.example.testtasks.security.JWTGenerator;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
+
 import java.security.Key;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

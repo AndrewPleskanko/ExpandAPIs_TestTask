@@ -1,10 +1,9 @@
-package  com.example.testtasks.security;
+package com.example.testtasks.security;
 
-import  com.example.testtasks.repositories.UserRepository;
-import  com.example.testtasks.entity.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.testtasks.repositories.UserRepository;
+import com.example.testtasks.entity.User;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,24 +14,26 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImplementation implements UserDetailsService {
-    final private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private final static String USER_NOT_FOUND_MSG =
-            "user with username %s not found";
-
-    @Autowired
-    public UserDetailsServiceImplementation (UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private static final String USER_NOT_FOUND_MSG = "User with username %s not found";
+    private static final String USER_LOADED_SUCCESSFULLY_MSG = "User loaded successfully: {}";
+    private static final String ATTEMPTING_TO_LOAD_USER_MSG = "Attempting to load user by username: {}";
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG,username)));
+        log.info(ATTEMPTING_TO_LOAD_USER_MSG, username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, username)));
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        log.info(USER_LOADED_SUCCESSFULLY_MSG, username);
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }
