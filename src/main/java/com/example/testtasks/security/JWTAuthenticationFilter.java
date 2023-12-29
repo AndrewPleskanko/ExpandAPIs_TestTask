@@ -17,7 +17,6 @@ import java.io.IOException;
 
 @Slf4j
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_TOKEN_PREFIX = "Bearer ";
     private static final String AUTHENTICATION_SUCCESSFUL_MESSAGE = "Authentication successful for user: {}";

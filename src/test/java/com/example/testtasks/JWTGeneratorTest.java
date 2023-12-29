@@ -51,7 +51,6 @@ public class JWTGeneratorTest {
 
     @Test
     void testValidateToken() {
-        // Mock the generateToken method to return a valid token
         String validToken = jwtGenerator.generateToken(mock(Authentication.class));
         String invalidToken = "invalid_token";
 
