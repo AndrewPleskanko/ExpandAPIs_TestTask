@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 public class JWTGenerator {
     @Value("${jwt.expiration}")
     private long jwtExpiration;
-
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     public String generateToken(Authentication authentication) {

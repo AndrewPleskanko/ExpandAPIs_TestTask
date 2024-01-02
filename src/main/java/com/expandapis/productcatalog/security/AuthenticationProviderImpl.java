@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AuthenticationProviderImplementation implements AuthenticationProvider {
-    private final UserDetailsServiceImplementation userDetailsService;
+public class AuthenticationProviderImpl implements AuthenticationProvider {
+    private final UserDetailsServiceImpl userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
     @Override

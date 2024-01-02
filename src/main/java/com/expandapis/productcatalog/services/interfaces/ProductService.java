@@ -8,5 +8,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
     void saveProducts(ProductDTO request);
+
     Page<Product> getAllProducts(Pageable pageable);
 }

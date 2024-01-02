@@ -3,7 +3,7 @@ package com.expandapis.productcatalog;
 import com.expandapis.productcatalog.controllers.ProductController;
 import com.expandapis.productcatalog.dto.ProductDTO;
 import com.expandapis.productcatalog.entity.Product;
-import com.expandapis.productcatalog.services.ProductServiceImp;
+import com.expandapis.productcatalog.services.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 public class ProductControllerTest {
 
     @Mock
-    private ProductServiceImp productService;
+    private ProductServiceImpl productService;
 
     @InjectMocks
     private ProductController productController;
@@ -36,7 +36,7 @@ public class ProductControllerTest {
         doNothing().when(productService).saveProducts(request);
 
         // Act
-        ResponseEntity<String> responseEntity = productController.addProducts(request);
+        ResponseEntity<String> responseEntity = productController.addProduct(request);
 
         // Assert
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
@@ -51,7 +51,7 @@ public class ProductControllerTest {
         doThrow(new RuntimeException("Test exception")).when(productService).saveProducts(request);
 
         // Act
-        ResponseEntity<String> responseEntity = productController.addProducts(request);
+        ResponseEntity<String> responseEntity = productController.addProduct(request);
 
         // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());

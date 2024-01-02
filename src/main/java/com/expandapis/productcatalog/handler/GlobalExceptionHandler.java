@@ -16,13 +16,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleStringException(Exception e) {
-        log.error(e.getMessage(), e);
+        log.error("Handle exception", e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
     @ExceptionHandler(ProductCatalogException.class)
     public ResponseEntity<List<Product>> handleListProductException(ProductCatalogException e) {
-        log.error(e.getMessage(), e);
+        log.error("Handle custom exception", e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 }

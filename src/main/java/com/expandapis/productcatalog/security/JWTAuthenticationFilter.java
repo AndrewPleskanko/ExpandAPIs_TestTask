@@ -23,7 +23,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JWTGenerator tokenGenerator;
     @Autowired
-    private UserDetailsServiceImplementation userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

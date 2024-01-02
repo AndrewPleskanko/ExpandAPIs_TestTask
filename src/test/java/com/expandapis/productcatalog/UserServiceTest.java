@@ -1,12 +1,13 @@
 package com.expandapis.productcatalog;
 
+import com.expandapis.productcatalog.entity.Role;
 import com.expandapis.productcatalog.entity.User;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -46,7 +48,7 @@ public class UserServiceTest {
         user.setId(id);
         user.setUsername("test");
         user.setPassword("test");
-
+        user.setRole(Role.ROLE_USER);
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
 
         // Act
@@ -59,23 +61,22 @@ public class UserServiceTest {
     @Test
     void testSaveUser() {
         // Arrange
-        UserDTO request = new UserDTO();
-        request.setUsername("test");
-        request.setPassword("test");
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername("testUser");
+        userDTO.setPassword("testPassword");
+        userDTO.setRole(Role.ROLE_USER);
 
-        User user = new User();
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
+        // When
+        userService.saveUser(userDTO);
 
-        when(passwordEncoder.encode(request.getPassword())).thenReturn(request.getPassword());
-        when(userRepository.save(any(User.class))).thenReturn(user);
+        // Then
+        List<User> userList = userRepository.findAll();
+        assertEquals(1, userList.size());
 
-        // Act
-        userService.saveUser(request);
-
-        // Assert
-        verify(userRepository).save(user);
-        assertEquals(request.getUsername(), user.getUsername());
-        assertEquals(request.getPassword(), user.getPassword());
+        User savedUser = userList.get(0);
+        assertNotNull(savedUser.getId());
+        assertEquals("testUser", savedUser.getUsername());
+        assertEquals("ROLE_USER", savedUser.getRole());
+        assertTrue(passwordEncoder.matches("testPassword", savedUser.getPassword()));
     }
 }

@@ -3,7 +3,7 @@ package com.expandapis.productcatalog;
 import com.expandapis.productcatalog.dto.ProductDTO;
 import com.expandapis.productcatalog.entity.Product;
 import com.expandapis.productcatalog.repositories.ProductRepository;
-import com.expandapis.productcatalog.services.ProductServiceImp;
+import com.expandapis.productcatalog.services.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -27,7 +27,7 @@ public class ProductServiceTest {
     private ProductRepository productRepository;
 
     @InjectMocks
-    private ProductServiceImp productService;
+    private ProductServiceImpl productService;
 
     public static Date parseDateString() throws ParseException {
         String dateString = "03-01-2023";

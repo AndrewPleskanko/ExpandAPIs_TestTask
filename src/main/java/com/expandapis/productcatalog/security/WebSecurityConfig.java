@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,8 +24,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfiguration {
-    private final UserDetailsServiceImplementation userDetailsService;
+@EnableMethodSecurity(securedEnabled = true)
+public class WebSecurityConfig {
+    private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthEntryPoint authEntryPoint;
 
     @Bean
@@ -40,7 +42,6 @@ public class WebSecurityConfiguration {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout=true"))
                 .exceptionHandling(ex -> ex.accessDeniedPage("/access-denied"))
-
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(authEntryPoint))
                 .sessionManagement(sm -> sm
@@ -52,7 +53,6 @@ public class WebSecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
-
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

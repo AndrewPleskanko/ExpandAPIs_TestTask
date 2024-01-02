@@ -1,3 +1,7 @@
 databaseChangeLog:
   - include:
-      file: classpath:/db/changelog/changes/001-initial-schema.sql
+      file: classpath:/db/changelog/changes/001-create-user-table.sql
+  - include:
+      file: classpath:/db/changelog/changes/003-create-product-table.sql
+
+
