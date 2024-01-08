@@ -1,4 +1,4 @@
-package com.expandapis.productcatalog;
+package com.expandapis.productcatalog.service;
 
 import com.expandapis.productcatalog.dto.ProductDTO;
 import com.expandapis.productcatalog.entity.Product;

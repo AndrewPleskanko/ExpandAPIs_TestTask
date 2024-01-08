@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 @Entity
-@Table(name = "registration")
+@Table(name = "app_user")
 public class User {
 
     @Id

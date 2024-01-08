@@ -1,4 +1,4 @@
-package com.expandapis.productcatalog;
+package com.expandapis.productcatalog.security;
 
 import com.expandapis.productcatalog.security.JWTGenerator;
 
@@ -9,7 +9,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -22,11 +21,10 @@ public class JWTGeneratorTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations. initMocks(this);
     }
 
     @Test
-    @WithMockUser(username = "testuser", password = "testpassword")
     void testGenerateToken() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String token = jwtGenerator.generateToken(authentication);
@@ -35,7 +33,6 @@ public class JWTGeneratorTest {
     }
 
     @Test
-    @WithMockUser(username = "testuser", password = "testpassword")
     void testGetUsernameFromJWT() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String token = jwtGenerator.generateToken(authentication);

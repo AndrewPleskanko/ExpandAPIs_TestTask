@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 @Api(value = "Product Service", description = "A service for working with products", tags = {"Product"})
+
 public class ProductController {
     private final ProductServiceImpl productService;
 
@@ -58,6 +59,7 @@ public class ProductController {
             @ApiResponse(code = 400, message = "Invalid page number or size"),
             @ApiResponse(code = 500, message = "Error retrieving products")
     })
+    @ResponseBody
     public ResponseEntity<Page<Product>> getAllProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int pageSize) {

@@ -62,4 +62,19 @@ public class UserServiceImp implements UserService {
     public List<User> getList() {
         return userRepository.findAll();
     }
+
+    /**
+     * Retrieves a user from the database based on the provided username.
+     *
+     * @param username The username of the user to fetch.
+     * @return The user with the specified username.
+     * @throws NoSuchElementException if no user is found with the given username.
+     */
+    @Override
+    public User findByUsername(String username) {
+        log.info("Fetching user by username: {}", username);
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new NoSuchElementException("User not found with username: " + username));
+    }
+
 }
