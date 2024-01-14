@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 @Api(value = "Product Service", description = "A service for working with products", tags = {"Product"})
-
 public class ProductController {
+
     private final ProductServiceImpl productService;
 
     /**
@@ -43,7 +43,6 @@ public class ProductController {
     public ResponseEntity<String> addProduct(@Valid @RequestBody ProductDTO request) {
         log.info("Request to add product" + request);
         productService.saveProducts(request);
-
         return ResponseEntity.ok("Records saved successfully");
     }
 

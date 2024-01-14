@@ -29,6 +29,7 @@ import java.util.List;
 @Api(value = "User Controller", tags = "User Controller", description = "REST API for managing users")
 @RequiredArgsConstructor
 public class LogInController {
+
     private final AuthenticationProviderImpl authenticationProvider;
     private final JWTGenerator tokenGenerator;
     private final UserServiceImp userService;
@@ -69,10 +70,10 @@ public class LogInController {
             @ApiResponse(code = 200, message = "Successfully added user"),
             @ApiResponse(code = 500, message = "Internal Server Error, error adding user")
     })
-    public ResponseEntity<String> add(@Valid @RequestBody UserDTO userSignUpRequest) {
+    public ResponseEntity<UserDTO> add(@Valid @RequestBody UserDTO userSignUpRequest) {
         userService.saveUser(userSignUpRequest);
         log.info("User added: " + userSignUpRequest.getUsername());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userSignUpRequest);
     }
 
     /**

@@ -9,120 +9,114 @@ import com.expandapis.productcatalog.security.JWTGenerator;
 import com.expandapis.productcatalog.services.UserServiceImp;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import org.testcontainers.junit.jupiter.Container;
-
-@Testcontainers
-@SpringBootTest
+@WebMvcTest(LogInController.class)
 public class LogInControllerIntegrationTest {
 
-    @Mock
-    private AuthenticationProviderImpl authenticationProvider;
-    @Mock
-    private JWTGenerator tokenGenerator;
-    @Mock
-    private UserServiceImp userService;
-    @Container
-    private static final PostgreSQLContainer<?> postgresContainer =
-            new PostgreSQLContainer(DockerImageName.parse("postgres:16-alpine"));
-    @InjectMocks
-    private LogInController logInController;
+    private UserDTO userDTO;
+    private List<User> userList;
 
+    @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private AuthenticationProviderImpl authenticationProvider;
+
+    @MockBean
+    private JWTGenerator tokenGenerator;
+
+    @MockBean
+    private UserServiceImp userService;
 
     @BeforeEach
     public void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(logInController).build();
-    }
-
-    @DynamicPropertySource
-    static void setProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", postgresContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", postgresContainer::getUsername);
-        registry.add("spring.datasource.password", postgresContainer::getPassword);
-        registry.add("spring.jpa.generate-ddl", () -> true);
+        userDTO = new UserDTO();
+        userDTO.setUsername("test");
+        userDTO.setPassword("test");
+        userDTO.setRole(Role.ROLE_USER);
+        User user1 = new User();
+        user1.setUsername("user1");
+        user1.setPassword("password1");
+        user1.setRole(Role.ROLE_USER);
+        User user2 = new User();
+        user2.setUsername("user2");
+        user2.setPassword("password2");
+        user2.setRole(Role.ROLE_USER);
+        User user3 = new User();
+        user3.setUsername("user3");
+        user3.setPassword("password3");
+        user3.setRole(Role.ROLE_ADMIN);
+        userList = Arrays.asList(user1, user2, user3);
     }
 
     @Test
-    public void authenticateTest() throws Exception {
-        // Arrange
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUsername("test");
-        userDTO.setPassword("test");
-        // Act
-        when(authenticationProvider.authenticate(any())).thenReturn(null);
+    @WithMockUser(roles = "USER")
+    @DisplayName("Should return a valid access token for a valid user")
+    public void testAuthenticate_returnsValidToken() throws Exception {
+        // Given
+        when(authenticationProvider.authenticate(any())).thenReturn(new UsernamePasswordAuthenticationToken("test", "test"));
         when(tokenGenerator.generateToken(any())).thenReturn("test-token");
-        // Assert
+
+        // When-Then
         mockMvc.perform(post("/users/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(userDTO)))
+                        .content(asJsonString(userDTO)).with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken", is("test-token")));
     }
 
     @Test
-    public void addNewUserTest() throws Exception {
-        // Arrange
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUsername("newUser");
-        userDTO.setPassword("password");
-        userDTO.setRole(Role.ROLE_USER);
-        // Act
+    @WithMockUser(roles = "ADMIN")
+    @DisplayName("Should add a new user and return the user details")
+    public void testAddNewUser_expandSuccess() throws Exception {
+        // Given
+        doNothing().when(userService).saveUser(any(UserDTO.class));
+
+        // When-Then
         mockMvc.perform(post("/users/add")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(userDTO)))
-                .andExpect(status().isOk());
+                        .content(asJsonString(userDTO)).with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value(userDTO.getUsername()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.password").value(userDTO.getPassword()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.role").value(userDTO.getRole().toString()));
+        verify(userService, times(1)).saveUser(any(UserDTO.class));
     }
 
     @Test
-    public void getListTest() throws Exception {
-        // Arrange
-        User user1 = new User();
-        user1.setUsername("user1");
-        user1.setPassword("password1");
-        user1.setRole(Role.ROLE_USER);
-
-        User user2 = new User();
-        user2.setUsername("user2");
-        user2.setPassword("password2");
-        user2.setRole(Role.ROLE_USER);
-
-        User user3 = new User();
-        user3.setUsername("user3");
-        user3.setPassword("password3");
-        user3.setRole(Role.ROLE_ADMIN);
-
-        List<User> userList = Arrays.asList(user1, user2, user3);
-        // Act
+    @WithMockUser(roles = "USER")
+    @DisplayName("Should return a list of all users")
+    public void testGetList_returnsAllUsers() throws Exception {
+        // Given
         when(userService.getList()).thenReturn(userList);
-        // Assert
+
+        // When-Then
         mockMvc.perform(get("/users/all"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$.[*].username", hasItems("user1", "user2", "user3")));
-    }
+                .andExpect(jsonPath("$.[*].username", hasItems("user1", "user2", "user3")))
+                .andExpect(jsonPath("$.[*].password", hasItems("password1", "password2", "password3")))
+                .andExpect(jsonPath("$.[*].role", containsInAnyOrder(Role.ROLE_USER.toString(), Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())));}
 
     private String asJsonString(Object obj) throws Exception {
         return new ObjectMapper().writeValueAsString(obj);
