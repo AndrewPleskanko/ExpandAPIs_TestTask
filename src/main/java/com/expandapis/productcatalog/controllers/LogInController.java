@@ -1,11 +1,10 @@
 package com.expandapis.productcatalog.controllers;
 
-import com.expandapis.productcatalog.dto.AuthResponseDTO;
-import com.expandapis.productcatalog.dto.UserDTO;
+import com.expandapis.productcatalog.dto.AuthResponseDto;
+import com.expandapis.productcatalog.dto.UserDto;
 import com.expandapis.productcatalog.entity.User;
-import com.expandapis.productcatalog.security.AuthenticationProviderImpl;
-import com.expandapis.productcatalog.security.JWTGenerator;
-import com.expandapis.productcatalog.services.UserServiceImp;
+import com.expandapis.productcatalog.services.AuthenticationServiceImpl;
+import com.expandapis.productcatalog.services.UserServiceImpl;
 import io.swagger.annotations.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,32 +26,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LogInController {
 
-    private final AuthenticationProviderImpl authenticationProvider;
-    private final JWTGenerator tokenGenerator;
-    private final UserServiceImp userService;
+    private final UserServiceImpl userService;
+    private final AuthenticationServiceImpl authenticationService;
 
     /**
      * Authenticates a user and generates a JWT token.
      *
-     * @param userSignUpRequest The user authentication request.
+     * @param userDto The user authentication request.
      * @return ResponseEntity containing the authentication response.
      */
     @PostMapping("authenticate")
-    @ApiOperation(value = "Authenticate user and generate JWT token", response = AuthResponseDTO.class)
+    @ApiOperation(value = "Authenticate user and generate JWT token", response = AuthResponseDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully authenticated and generated token"),
             @ApiResponse(code = 401, message = "Unauthorized, authentication failed")
     })
-    public ResponseEntity<AuthResponseDTO> authenticate(@Valid @RequestBody UserDTO userSignUpRequest) {
-        log.info("Received authentication request for user: " + userSignUpRequest.getUsername());
-
-        Authentication auth = authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(
-                userSignUpRequest.getUsername(),
-                userSignUpRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        String token = tokenGenerator.generateToken(auth);
-        log.info("Generated token for user: " + userSignUpRequest.getUsername());
-        return new ResponseEntity<>(new AuthResponseDTO(token), HttpStatus.OK);
+    public ResponseEntity<AuthResponseDto> authenticate(@Valid @RequestBody UserDto userDto) {
+        AuthResponseDto response = authenticationService.authenticateUser(userDto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -70,7 +58,7 @@ public class LogInController {
             @ApiResponse(code = 200, message = "Successfully added user"),
             @ApiResponse(code = 500, message = "Internal Server Error, error adding user")
     })
-    public ResponseEntity<UserDTO> add(@Valid @RequestBody UserDTO userSignUpRequest) {
+    public ResponseEntity<UserDto> add(@Valid @RequestBody UserDto userSignUpRequest) {
         userService.saveUser(userSignUpRequest);
         log.info("User added: " + userSignUpRequest.getUsername());
         return ResponseEntity.ok(userSignUpRequest);

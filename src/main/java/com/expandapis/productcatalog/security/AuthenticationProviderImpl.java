@@ -20,6 +20,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
+
         if (userDetailsService == null) {
             throw new InternalAuthenticationServiceException("User service is null");
         }

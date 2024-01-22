@@ -1,6 +1,6 @@
 package com.expandapis.productcatalog.controllers;
 
-import com.expandapis.productcatalog.dto.ProductDTO;
+import com.expandapis.productcatalog.dto.ProductDto;
 import com.expandapis.productcatalog.entity.Product;
 import com.expandapis.productcatalog.services.ProductServiceImpl;
 import io.swagger.annotations.Api;
@@ -40,7 +40,7 @@ public class ProductController {
             @ApiResponse(code = 200, message = "Records saved successfully"),
             @ApiResponse(code = 500, message = "Error saving records")
     })
-    public ResponseEntity<String> addProduct(@Valid @RequestBody ProductDTO request) {
+    public ResponseEntity<String> addProduct(@Valid @RequestBody ProductDto request) {
         log.info("Request to add product" + request);
         productService.saveProducts(request);
         return ResponseEntity.ok("Records saved successfully");

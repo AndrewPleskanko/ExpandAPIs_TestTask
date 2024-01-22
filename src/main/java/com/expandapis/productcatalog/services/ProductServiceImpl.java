@@ -1,6 +1,6 @@
 package com.expandapis.productcatalog.services;
 
-import com.expandapis.productcatalog.dto.ProductDTO;
+import com.expandapis.productcatalog.dto.ProductDto;
 import com.expandapis.productcatalog.entity.Product;
 import com.expandapis.productcatalog.repositories.ProductRepository;
 import com.expandapis.productcatalog.services.interfaces.ProductService;
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
      * @param request DTO for saving products.
      */
     @Override
-    public void saveProducts(ProductDTO request) {
+    public void saveProducts(ProductDto request) {
         log.info("Saving products: {}", request.getRecords());
         List<Product> records = request.getRecords();
         productRepository.saveAll(records);

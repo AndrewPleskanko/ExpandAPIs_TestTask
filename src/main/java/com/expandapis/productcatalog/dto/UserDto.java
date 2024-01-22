@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Data
 @Setter
-public class UserDTO {
+public class UserDto {
     @NotEmpty(message = "Username cannot be empty")
     private String username;
 

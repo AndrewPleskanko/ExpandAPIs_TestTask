@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.expandapis.productcatalog.repositories.UserRepository;
-import com.expandapis.productcatalog.services.UserServiceImp;
+import com.expandapis.productcatalog.services.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -29,6 +29,12 @@ public class UserServiceIntegrationTest {
 
     private List<User> userList;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserServiceImpl userService;
+
     @Container
     private static final PostgreSQLContainer<?> postgresContainer =
             new PostgreSQLContainer(DockerImageName.parse("postgres:16-alpine"));
@@ -40,12 +46,6 @@ public class UserServiceIntegrationTest {
         registry.add("spring.datasource.password", postgresContainer::getPassword);
         registry.add("spring.jpa.generate-ddl", () -> true);
     }
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserServiceImp userService;
 
     @BeforeEach
     void setUp() {

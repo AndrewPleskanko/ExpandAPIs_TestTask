@@ -37,8 +37,7 @@ public class WebSecurityConfig {
                         login -> login
                                 .loginPage("/login").permitAll()
                                 .successHandler(successHandler())
-                                .permitAll()
-                )
+                                .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout=true"))
                 .exceptionHandling(ex -> ex.accessDeniedPage("/access-denied"))

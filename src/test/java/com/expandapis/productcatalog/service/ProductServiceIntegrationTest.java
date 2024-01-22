@@ -1,6 +1,6 @@
 package com.expandapis.productcatalog.service;
 
-import com.expandapis.productcatalog.dto.ProductDTO;
+import com.expandapis.productcatalog.dto.ProductDto;
 import com.expandapis.productcatalog.entity.Product;
 import com.expandapis.productcatalog.repositories.ProductRepository;
 import com.expandapis.productcatalog.services.ProductServiceImpl;
@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Testcontainers
 public class ProductServiceIntegrationTest {
 
-    private ProductDTO productDTO;
+    private ProductDto productDTO;
     private List<Product> products;
 
     @Autowired
@@ -53,7 +53,7 @@ public class ProductServiceIntegrationTest {
     @BeforeEach
     public void setup() throws ParseException {
         // Given
-        productDTO = new ProductDTO();
+        productDTO = new ProductDto();
         products = Arrays.asList(
                 new Product(1L, parseDateString(), "11111", "Fina Lika", 30, "Paid"),
                 new Product(2L, parseDateString(), "11111", "Test Inventory 2", 20, "Paid")
@@ -67,6 +67,7 @@ public class ProductServiceIntegrationTest {
         // When
         productService.saveProducts(productDTO);
         List<Product> actualProducts = productRepository.findAll();
+
         // Then
         assertEquals(products, actualProducts, "The lists of products should match");
     }
@@ -77,11 +78,11 @@ public class ProductServiceIntegrationTest {
         // When
         productService.saveProducts(productDTO);
         List<Product> actualProducts = productService.getAllProducts(Pageable.unpaged()).getContent();
+
         // Then
         assertAll(
                 () -> assertEquals(products.size(), actualProducts.size(), "The page should have the same number of elements as the expected list"),
-                () -> assertTrue(actualProducts.containsAll(products), "The page should contain all the expected products")
-        );
+                () -> assertTrue(actualProducts.containsAll(products), "The page should contain all the expected products"));
     }
 
     public static Date parseDateString() throws ParseException {

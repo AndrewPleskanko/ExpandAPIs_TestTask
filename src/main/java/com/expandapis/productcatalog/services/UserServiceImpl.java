@@ -1,6 +1,6 @@
 package com.expandapis.productcatalog.services;
 
-import com.expandapis.productcatalog.dto.UserDTO;
+import com.expandapis.productcatalog.dto.UserDto;
 import com.expandapis.productcatalog.repositories.UserRepository;
 import com.expandapis.productcatalog.entity.User;
 import com.expandapis.productcatalog.services.interfaces.UserService;
@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -43,7 +43,7 @@ public class UserServiceImp implements UserService {
      */
     @Override
     @Transactional
-    public void saveUser(UserDTO request) {
+    public void saveUser(UserDto request) {
         log.info("Saving user: {}", request.getUsername());
         User user = new User();
         user.setUsername(request.getUsername());
@@ -76,5 +76,4 @@ public class UserServiceImp implements UserService {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new NoSuchElementException("User not found with username: " + username));
     }
-
 }
