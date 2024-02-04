@@ -1,12 +1,12 @@
 package com.expandapis.productcatalog.dto;
 
+import java.util.List;
+
 import com.expandapis.productcatalog.entity.Product;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Setter;
-
-import java.util.List;
 
 @Data
 @Setter

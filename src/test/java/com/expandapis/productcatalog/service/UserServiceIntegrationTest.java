@@ -1,33 +1,39 @@
 package com.expandapis.productcatalog.service;
 
-import com.expandapis.productcatalog.entity.Role;
-import com.expandapis.productcatalog.entity.User;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.expandapis.productcatalog.repositories.UserRepository;
-import com.expandapis.productcatalog.services.UserServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
-
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.expandapis.productcatalog.dto.UserDto;
+import com.expandapis.productcatalog.entity.Role;
+import com.expandapis.productcatalog.entity.User;
+import com.expandapis.productcatalog.repositories.UserRepository;
+import com.expandapis.productcatalog.services.UserServiceImpl;
+import com.expandapis.productcatalog.utils.UserTestUtils;
+
 @SpringBootTest
-@Testcontainers
-public class UserServiceIntegrationTest {
+public class UserServiceIntegrationTest extends BaseServiceTest {
 
     private List<User> userList;
+    private User user1;
+    private User user2;
+
+    private UserDto userDtoUser;
+    private UserDto userDtoAdmin;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
@@ -35,65 +41,60 @@ public class UserServiceIntegrationTest {
     @Autowired
     private UserServiceImpl userService;
 
-    @Container
-    private static final PostgreSQLContainer<?> postgresContainer =
-            new PostgreSQLContainer(DockerImageName.parse("postgres:16-alpine"));
-
-    @DynamicPropertySource
-    static void setProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", postgresContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", postgresContainer::getUsername);
-        registry.add("spring.datasource.password", postgresContainer::getPassword);
-        registry.add("spring.jpa.generate-ddl", () -> true);
-    }
-
     @BeforeEach
     void setUp() {
         //Given
-        User user1 = new User(1L, "test1", "test123", Role.ROLE_USER);
-        User user2 = new User(2L, "test2", "test234", Role.ROLE_ADMIN);
+        user1 = new User(1L, "test1", "test123", Role.ROLE_USER);
+        user2 = new User(2L, "test2", "test234", Role.ROLE_ADMIN);
+        userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER);
+        userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN);
         userList = Arrays.asList(user1, user2);
     }
 
     @Test
     @DisplayName("Get User by ID")
-    void getUserById_returnsUser_existingId() {
+    @Transactional
+    void getUserById_returnsUser_expectGetUerId() {
         // Given
-        Long id = 1L;
-        userRepository.save(userList.get(0));
+        userRepository.save(user1);
+        Long id = user1.getId();
 
         // When
         User result = userService.get(id);
 
         // Then
-        assertEquals(userList.get(0), result);
+        assertEquals(user1.getId(), result.getId());
+        assertEquals(user1.getUsername(), result.getUsername());
+        assertEquals(user1.getPassword(), result.getPassword());
     }
 
     @Test
     @DisplayName("Save User with Valid UserDTO")
-    void saveUser_WithValidUserDTO_SavesUserToRepository() {
-        // Given
-        User savedUser = userList.get(0);
-
+    @Transactional
+    void saveUser_WithValidUserDto_SavesUserToRepository() {
+        //Given
+        int expectedSize = 2;
         // When
-        userRepository.save(savedUser);
+        userService.saveUser(userDtoUser);
+        userService.saveUser(userDtoAdmin);
+        List<User> userListFromRepository = userRepository.findAll();
 
         // Then
-        List<User> userListFromRepository  = userRepository.findAll();
-        assertEquals(1, userListFromRepository .size());
-
-        assertNotNull(userListFromRepository .get(0).getId());
-        assertEquals("test1", userListFromRepository .get(0).getUsername());
-        assertEquals(Role.ROLE_USER, userListFromRepository .get(0).getRole());
-        assertEquals("test123", userListFromRepository .get(0).getPassword());
+        assertEquals(expectedSize, userListFromRepository.size());
+        User firstUser = userListFromRepository.get(0);
+        assertNotNull(firstUser.getId());
+        assertEquals(userDtoUser.getUsername(), firstUser.getUsername());
+        assertEquals(userDtoUser.getRole(), firstUser.getRole());
+        assertTrue(passwordEncoder.matches(userDtoUser.getPassword(), firstUser.getPassword()));
     }
 
     @Test
     @DisplayName("Get List of Users")
+    @Transactional
     void getList_withMultipleUsers_returnsUserList() {
         // Given
-        userRepository.save(userList.get(0));
-        userRepository.save(userList.get(1));
+        userRepository.save(user1);
+        userRepository.save(user2);
 
         // When
         List<User> usersInService = userService.getList();
@@ -106,14 +107,17 @@ public class UserServiceIntegrationTest {
 
     @Test
     @DisplayName("Find User by Username")
+    @Transactional
     void findByUsername_withExistingUsername_returnsUser() {
         // Given
-        userRepository.save(userList.get(0));
+        userRepository.save(user1);
 
         // When
-        User result = userService.findByUsername(userList.get(0).getUsername());
+        User firstUser = userService.findByUsername(user1.getUsername());
 
         // Then
-        assertEquals(userList.get(0), result);
+        assertEquals(user1.getUsername(), firstUser.getUsername());
+        assertEquals(user1.getRole(), firstUser.getRole());
+        assertEquals(user1.getPassword(), firstUser.getPassword());
     }
 }

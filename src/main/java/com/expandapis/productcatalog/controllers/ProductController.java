@@ -1,5 +1,17 @@
 package com.expandapis.productcatalog.controllers;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.expandapis.productcatalog.dto.ProductDto;
 import com.expandapis.productcatalog.entity.Product;
 import com.expandapis.productcatalog.services.ProductServiceImpl;
@@ -10,15 +22,11 @@ import io.swagger.annotations.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 /**
- * A service for working with products
+ * A service for working with products.
  */
+
 @Slf4j
 @RestController
 @RequestMapping("/products")
@@ -29,7 +37,7 @@ public class ProductController {
     private final ProductServiceImpl productService;
 
     /**
-     * Adds products to the database
+     * Adds products to the database.
      *
      * @param request the product DTO containing the list of products to add
      * @return a response entity with a success or error message
@@ -47,10 +55,11 @@ public class ProductController {
     }
 
     /**
-     * Gets all products from the database
+     * Gets all products from the database.
      *
      * @return a response entity with a list of products or an error message
      */
+
     @GetMapping("all")
     @ApiOperation(value = "Get all products", notes = "Gets all products from the database")
     @ApiResponses(value = {

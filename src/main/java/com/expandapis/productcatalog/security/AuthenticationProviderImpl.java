@@ -1,13 +1,18 @@
 package com.expandapis.productcatalog.security;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -30,7 +35,8 @@ public class AuthenticationProviderImpl implements AuthenticationProvider {
         }
         if (passwordEncoder.matches(password, user.getPassword())) {
             log.info("Authentication successful for user: {}", username);
-            return new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), user.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(user,
+                    authentication.getCredentials(), user.getAuthorities());
         } else {
             throw new AuthenticationServiceException("Unable to authenticate user due to some problems");
         }

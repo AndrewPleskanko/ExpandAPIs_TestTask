@@ -1,17 +1,18 @@
 package com.expandapis.productcatalog.services;
 
-import com.expandapis.productcatalog.dto.UserDto;
-import com.expandapis.productcatalog.repositories.UserRepository;
-import com.expandapis.productcatalog.entity.User;
-import com.expandapis.productcatalog.services.interfaces.UserService;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import com.expandapis.productcatalog.dto.UserDto;
+import com.expandapis.productcatalog.entity.User;
+import com.expandapis.productcatalog.repositories.UserRepository;
+import com.expandapis.productcatalog.services.interfaces.UserService;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Service for working with users.
@@ -20,7 +21,6 @@ import java.util.NoSuchElementException;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
-
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(Long id) {
         log.info("Fetching user by ID: {}", id);
-        return userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found with ID: " + id));
+        return userRepository.findById(id).orElseThrow(() ->
+                new NoSuchElementException("User not found with ID: " + id));
     }
 
     /**

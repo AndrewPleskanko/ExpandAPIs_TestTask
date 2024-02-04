@@ -1,22 +1,21 @@
 package com.expandapis.productcatalog.security;
 
+import java.security.Key;
 import java.util.Date;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-
-import java.security.Key;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Component
-public class JWTGenerator {
+public class JwtGenerator {
     @Value("${jwt.expiration}")
     private long jwtExpiration;
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
@@ -38,7 +37,7 @@ public class JWTGenerator {
         return token;
     }
 
-    public String getUsernameFromJWT(String token) {
+    public String getUsernameFromJwt(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()

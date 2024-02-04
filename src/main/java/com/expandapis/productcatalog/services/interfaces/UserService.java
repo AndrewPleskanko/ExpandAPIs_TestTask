@@ -1,9 +1,9 @@
 package com.expandapis.productcatalog.services.interfaces;
 
+import java.util.List;
+
 import com.expandapis.productcatalog.dto.UserDto;
 import com.expandapis.productcatalog.entity.User;
-
-import java.util.List;
 
 public interface UserService {
     void saveUser(UserDto request);
