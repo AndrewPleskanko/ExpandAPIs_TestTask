@@ -1,13 +1,27 @@
-package com.expandapis.productcatalog.controller;
+package com.expandapis.productcatalog.controllers;
 
-import com.expandapis.productcatalog.controllers.LogInController;
-import com.expandapis.productcatalog.dto.UserDto;
-import com.expandapis.productcatalog.entity.Role;
-import com.expandapis.productcatalog.entity.User;
-import com.expandapis.productcatalog.security.*;
-import com.expandapis.productcatalog.services.AuthenticationServiceImpl;
-import com.expandapis.productcatalog.services.UserServiceImpl;
-import com.expandapis.productcatalog.utils.UserTestUtils;
+import static com.expandapis.productcatalog.utils.TokenGenerationUtils.asJsonString;
+import static com.expandapis.productcatalog.utils.TokenGenerationUtils.extractTokenFromResponse;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,22 +39,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static com.expandapis.productcatalog.utils.TokenGenerationUtils.asJsonString;
-import static com.expandapis.productcatalog.utils.TokenGenerationUtils.extractTokenFromResponse;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.expandapis.productcatalog.dto.UserDto;
+import com.expandapis.productcatalog.entity.Role;
+import com.expandapis.productcatalog.entity.User;
+import com.expandapis.productcatalog.security.JwtAuthEntryPoint;
+import com.expandapis.productcatalog.security.JwtGenerator;
+import com.expandapis.productcatalog.security.UserDetailsServiceImpl;
+import com.expandapis.productcatalog.security.WebSecurityConfig;
+import com.expandapis.productcatalog.services.AuthenticationServiceImpl;
+import com.expandapis.productcatalog.services.UserServiceImpl;
+import com.expandapis.productcatalog.utils.UserTestUtils;
 
 @WebMvcTest(LogInController.class)
-@Import({WebSecurityConfig.class, JWTGenerator.class, JWTAuthEntryPoint.class, AuthenticationServiceImpl.class})
+@Import({WebSecurityConfig.class, JwtGenerator.class, JwtAuthEntryPoint.class, AuthenticationServiceImpl.class})
 public class LogInControllerIntegrationTest {
 
     private UserDto userDtoUser;
@@ -75,7 +86,7 @@ public class LogInControllerIntegrationTest {
     @DisplayName("Should return a valid access token for a valid user")
     public void testAuthenticate_returnsValidToken() throws Exception {
         // When
-        givenValidUserDetailsAndAuthenticationProvider();
+        mockLoadUserByUsername();
 
         // Then
         MvcResult authenticateResult = mockMvc.perform(post("/users/authenticate")
@@ -88,10 +99,10 @@ public class LogInControllerIntegrationTest {
 
     @Test
     @DisplayName("Should add a new user and return the user details")
-    public void testAddNewUser_expandSuccess() throws Exception {
+    public void testAddNewUser_expectSuccess() throws Exception {
         // When
         doNothing().when(userService).saveUser(any(UserDto.class));
-        givenValidUserDetailsAndAuthenticationProvider();
+        mockLoadUserByUsername();
 
         String token = generateAuthToken(userDtoUser);
 
@@ -114,7 +125,8 @@ public class LogInControllerIntegrationTest {
         //When
         when(userService.getList()).thenReturn(userList);
         when(userDetailsService.loadUserByUsername(anyString()))
-                .thenReturn(new org.springframework.security.core.userdetails.User("admin", "$2a$10$H7Tw60M/fe.vwwBgxCTvYuDrHGOhJ6s.yxArIrjsgfQOwL6lR2RdO", Collections.singleton(Role.ROLE_ADMIN)));
+                .thenReturn(new User("admin",
+                        "$2a$10$H7Tw60M/fe.vwwBgxCTvYuDrHGOhJ6s.yxArIrjsgfQOwL6lR2RdO", Role.ROLE_ADMIN));
         when(authenticationProvider.authenticate(any(Authentication.class)))
                 .thenReturn(new UsernamePasswordAuthenticationToken(
                         userDtoAdmin.getUsername(),
@@ -129,7 +141,8 @@ public class LogInControllerIntegrationTest {
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$.[*].username", hasItems("user1", "user2", "user3")))
                 .andExpect(jsonPath("$.[*].password", hasItems("password1", "password2", "password3")))
-                .andExpect(jsonPath("$.[*].role", containsInAnyOrder(Role.ROLE_USER.toString(), Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())));
+                .andExpect(jsonPath("$.[*].role", containsInAnyOrder(Role.ROLE_USER.toString(),
+                        Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())));
     }
 
     @Test
@@ -137,7 +150,7 @@ public class LogInControllerIntegrationTest {
     public void testGetList_returnsForbidden() throws Exception {
         //Given
         when(userService.getList()).thenReturn(userList);
-        givenValidUserDetailsAndAuthenticationProvider();
+        mockLoadUserByUsername();
 
         String token = generateAuthToken(userDtoUser);
 
@@ -152,8 +165,9 @@ public class LogInControllerIntegrationTest {
     @DisplayName("Should return 500 Internal Server Error for an existing user")
     public void testAddNewUser_returnsServerError() throws Exception {
         //Given
-        doThrow(new DataIntegrityViolationException("User already exists")).when(userService).saveUser(any(UserDto.class));
-        givenValidUserDetailsAndAuthenticationProvider();
+        doThrow(new DataIntegrityViolationException("User already exists"))
+                .when(userService).saveUser(any(UserDto.class));
+        mockLoadUserByUsername();
         String token = generateAuthToken(userDtoUser);
 
         //Then
@@ -186,10 +200,10 @@ public class LogInControllerIntegrationTest {
                 .andExpect(status().isUnauthorized());
     }
 
-    private String generateAuthToken(UserDto userDTO) throws Exception {
+    private String generateAuthToken(UserDto userDto) throws Exception {
         MvcResult authenticateResult = mockMvc.perform(post("/users/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(userDTO)).with(csrf()))
+                        .content(asJsonString(userDto)).with(csrf()))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -197,10 +211,11 @@ public class LogInControllerIntegrationTest {
         return extractTokenFromResponse(response);
     }
 
-    private void givenValidUserDetailsAndAuthenticationProvider() {
+    private void mockLoadUserByUsername() {
         //When
         when(userDetailsService.loadUserByUsername(anyString()))
-                .thenReturn(new org.springframework.security.core.userdetails.User("john", "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq", Collections.singleton(Role.ROLE_USER)));
+                .thenReturn(new User("john",
+                        "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq", Role.ROLE_USER));
         when(authenticationProvider.authenticate(any(Authentication.class)))
                 .thenReturn(new UsernamePasswordAuthenticationToken(
                         userDtoUser.getUsername(),

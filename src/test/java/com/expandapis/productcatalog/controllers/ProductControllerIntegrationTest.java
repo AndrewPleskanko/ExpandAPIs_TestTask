@@ -1,16 +1,27 @@
-package com.expandapis.productcatalog.controller;
+package com.expandapis.productcatalog.controllers;
 
-import com.expandapis.productcatalog.controllers.ProductController;
-import com.expandapis.productcatalog.dto.AuthResponseDto;
-import com.expandapis.productcatalog.dto.ProductDto;
-import com.expandapis.productcatalog.dto.UserDto;
-import com.expandapis.productcatalog.entity.Product;
-import com.expandapis.productcatalog.entity.Role;
-import com.expandapis.productcatalog.security.*;
-import com.expandapis.productcatalog.services.AuthenticationServiceImpl;
-import com.expandapis.productcatalog.services.ProductServiceImpl;
-import com.expandapis.productcatalog.utils.UserTestUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static com.expandapis.productcatalog.utils.TokenGenerationUtils.asJsonString;
+import static com.expandapis.productcatalog.utils.TokenGenerationUtils.extractTokenFromResponse;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,30 +39,28 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
-import static com.expandapis.productcatalog.utils.TokenGenerationUtils.asJsonString;
-import static com.expandapis.productcatalog.utils.TokenGenerationUtils.extractTokenFromResponse;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.expandapis.productcatalog.dto.AuthResponseDto;
+import com.expandapis.productcatalog.dto.ProductDto;
+import com.expandapis.productcatalog.dto.UserDto;
+import com.expandapis.productcatalog.entity.Product;
+import com.expandapis.productcatalog.entity.Role;
+import com.expandapis.productcatalog.entity.User;
+import com.expandapis.productcatalog.security.JwtAuthEntryPoint;
+import com.expandapis.productcatalog.security.JwtGenerator;
+import com.expandapis.productcatalog.security.UserDetailsServiceImpl;
+import com.expandapis.productcatalog.security.WebSecurityConfig;
+import com.expandapis.productcatalog.services.AuthenticationServiceImpl;
+import com.expandapis.productcatalog.services.ProductServiceImpl;
+import com.expandapis.productcatalog.utils.UserTestUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WebMvcTest(ProductController.class)
-@Import({WebSecurityConfig.class, JWTGenerator.class, JWTAuthEntryPoint.class, AuthenticationServiceImpl.class})
+@Import({WebSecurityConfig.class, JwtGenerator.class, JwtAuthEntryPoint.class, AuthenticationServiceImpl.class})
 public class ProductControllerIntegrationTest {
 
     private List<Product> productList;
     private UserDto userDtoUser;
-    private ProductDto productDTO;
+    private ProductDto productDto;
 
     @MockBean
     private ProductServiceImpl productService;
@@ -78,12 +87,13 @@ public class ProductControllerIntegrationTest {
                 new Product(2L, parseDateString(), "11111", "Test Inventory 2", 20, "Paid")
         );
 
-        productDTO = new ProductDto();
-        productDTO.setTable("products");
-        productDTO.setRecords(productList);
+        productDto = new ProductDto();
+        productDto.setTable("products");
+        productDto.setRecords(productList);
 
         when(userDetailsService.loadUserByUsername(anyString()))
-                .thenReturn(new org.springframework.security.core.userdetails.User("john", "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq", Collections.singleton(Role.ROLE_USER)));
+                .thenReturn(new User("john",
+                        "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq", Role.ROLE_USER));
         Authentication auth = new UsernamePasswordAuthenticationToken(
                 "john", "123", Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
         when(authenticationProvider.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(auth);
@@ -111,7 +121,7 @@ public class ProductControllerIntegrationTest {
         mockMvc.perform(post("/products/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("Authorization", "Bearer " + token)
-                        .content(asJsonString(productDTO)).with(csrf()))
+                        .content(asJsonString(productDto)).with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Records saved successfully"));
     }

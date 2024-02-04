@@ -1,16 +1,17 @@
 package com.expandapis.productcatalog.services;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import com.expandapis.productcatalog.dto.ProductDto;
 import com.expandapis.productcatalog.entity.Product;
 import com.expandapis.productcatalog.repositories.ProductRepository;
 import com.expandapis.productcatalog.services.interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Service for working with products.

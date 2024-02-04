@@ -1,11 +1,11 @@
 package com.expandapis.productcatalog.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.expandapis.productcatalog.dto.UserDto;
 import com.expandapis.productcatalog.entity.Role;
 import com.expandapis.productcatalog.entity.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserTestUtils {
     public static UserDto createUserDto(String username, String password, Role role) {
