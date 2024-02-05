@@ -77,7 +77,7 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
         // When
         userService.saveUser(userDtoUser);
         userService.saveUser(userDtoAdmin);
-        List<User> userListFromRepository = userRepository.findAll();
+        List<User> userListFromRepository = userService.getList();
 
         // Then
         assertEquals(expectedSize, userListFromRepository.size());

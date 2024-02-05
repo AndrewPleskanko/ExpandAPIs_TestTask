@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.expandapis.productcatalog.entity.Role;
 import com.expandapis.productcatalog.entity.User;
@@ -26,6 +27,7 @@ public class UserDetailsServiceImplTest extends BaseServiceTest {
     private UserRepository userRepository;
 
     @Test
+    @Transactional
     public void testLoadUserByUsername_WhenUserExists_ShouldReturnUserDetails() {
         // Given
         User user = new User(1L, "test1", "test123", Role.ROLE_USER);

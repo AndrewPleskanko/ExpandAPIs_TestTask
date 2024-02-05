@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.expandapis.productcatalog.dto.ProductDto;
 import com.expandapis.productcatalog.entity.Product;
@@ -47,6 +48,7 @@ public class ProductServiceIntegrationTest extends BaseServiceTest {
 
     @Test
     @DisplayName("Save products to the database")
+    @Transactional
     public void saveProducts_WithProductDto_SavesProductsToRepository() {
         // When
         productService.saveProducts(productDto);
@@ -58,6 +60,7 @@ public class ProductServiceIntegrationTest extends BaseServiceTest {
 
     @Test
     @DisplayName("Get all products from the database")
+    @Transactional
     public void getProducts_withSavedProducts_returnsProducts() {
         // When
         productService.saveProducts(productDto);

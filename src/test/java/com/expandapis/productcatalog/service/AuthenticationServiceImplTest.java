@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.expandapis.productcatalog.dto.AuthResponseDto;
 import com.expandapis.productcatalog.dto.UserDto;
@@ -23,7 +24,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 class AuthenticationServiceImplTest extends BaseServiceTest {
     private UserDto userDtoUser;
     private UserDto userDtoAdmin;
-    private UserDto userDtoModerator;
     private ObjectMapper mapper;
 
     @Autowired
@@ -37,14 +37,14 @@ class AuthenticationServiceImplTest extends BaseServiceTest {
         // Given
         userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER);
         userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN);
-        userDtoModerator = UserTestUtils.createUserDto("moder", "moder", Role.ROLE_MODERATOR);
-        userService.saveUser(userDtoUser);
-        userService.saveUser(userDtoAdmin);
         mapper = new ObjectMapper();
     }
 
     @Test
+    @Transactional
     public void testAuthenticateUser_ReturnsValidToken() throws IOException {
+        userService.saveUser(userDtoUser);
+        userService.saveUser(userDtoAdmin);
         // When
         AuthResponseDto result1 = authenticationService.authenticateUser(userDtoUser);
 
