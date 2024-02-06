@@ -23,6 +23,7 @@ import com.expandapis.productcatalog.services.UserServiceImpl;
 import com.expandapis.productcatalog.utils.UserTestUtils;
 
 @SpringBootTest
+
 public class UserServiceIntegrationTest extends BaseServiceTest {
 
     private List<User> userList;

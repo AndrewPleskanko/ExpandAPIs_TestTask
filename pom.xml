@@ -202,6 +202,7 @@
                 <version>3.3.1</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
+                    <violationSeverity>warning</violationSeverity>
                 </configuration>
                 <executions>
                     <execution>
@@ -224,6 +225,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.21.0</version>
                 <configuration>
+                    <printFailingErrors>true</printFailingErrors>
                     <linkXRef>false</linkXRef>
                     <rulesets>
                         <ruleset>pmd.xml</ruleset>
@@ -255,6 +257,16 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>jxr</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>jxr</goal>
+                            <goal>test-jxr</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

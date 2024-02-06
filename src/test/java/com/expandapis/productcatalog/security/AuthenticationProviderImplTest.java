@@ -1,5 +1,6 @@
 package com.expandapis.productcatalog.security;
 
+import static com.expandapis.productcatalog.utils.UserTestUtils.createUser;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Assertions;
@@ -35,7 +36,7 @@ public class AuthenticationProviderImplTest extends BaseServiceTest {
 
     @BeforeEach
     public void setUp() {
-        user = new User(1L, "test1", "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq", Role.ROLE_USER);
+        user = createUser("test1", "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq", Role.ROLE_USER);
     }
 
     @Test

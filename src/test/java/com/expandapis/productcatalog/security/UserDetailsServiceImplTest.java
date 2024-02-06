@@ -1,5 +1,6 @@
 package com.expandapis.productcatalog.security;
 
+import static com.expandapis.productcatalog.utils.UserTestUtils.createUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -30,7 +31,7 @@ public class UserDetailsServiceImplTest extends BaseServiceTest {
     @Transactional
     public void testLoadUserByUsername_WhenUserExists_ShouldReturnUserDetails() {
         // Given
-        User user = new User(1L, "test1", "test123", Role.ROLE_USER);
+        User user = createUser("test1", "test123", Role.ROLE_USER);
         userRepository.save(user);
 
         // When
