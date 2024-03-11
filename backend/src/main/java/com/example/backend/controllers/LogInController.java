@@ -2,7 +2,6 @@ package com.example.backend.controllers;
 
 import java.util.List;
 
-import com.example.backend.services.EmailServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.example.backend.dto.AuthResponseDto;
 import com.example.backend.dto.UserDto;
 import com.example.backend.entity.User;
 import com.example.backend.services.AuthenticationServiceImpl;
+import com.example.backend.services.EmailServiceImpl;
 import com.example.backend.services.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
