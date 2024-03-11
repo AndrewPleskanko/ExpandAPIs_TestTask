@@ -45,8 +45,8 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
     @BeforeEach
     void setUp() {
         //Given
-        user1 = new User(1L, "test1", "test123", Role.ROLE_USER);
-        user2 = new User(2L, "test2", "test234", Role.ROLE_ADMIN);
+        user1 = new User(1L, "test1", "test123", "presF@gmail.com", Role.ROLE_USER);
+        user2 = new User(2L, "test2", "test234","test2@gmail.com", Role.ROLE_ADMIN);
         userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER);
         userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN);
         userList = Arrays.asList(user1, user2);

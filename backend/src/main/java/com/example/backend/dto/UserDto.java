@@ -15,6 +15,9 @@ public class UserDto {
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
+    @Size(min = 4, message = "Email must be at least 4 characters long")
+    private String email;
+
     @NotEmpty(message = "Role cannot be empty")
     private Role role;
 }

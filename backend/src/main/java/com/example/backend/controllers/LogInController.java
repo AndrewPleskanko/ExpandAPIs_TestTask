@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 import java.util.List;
 
+import com.example.backend.services.EmailServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,9 +37,9 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = "http://localhost:4200")
 public class LogInController {
 
-
     private final UserServiceImpl userService;
     private final AuthenticationServiceImpl authenticationService;
+    private final EmailServiceImpl emailService;
 
     /**
      * Authenticates a user and generates a JWT token.
@@ -72,6 +73,12 @@ public class LogInController {
     public ResponseEntity<UserDto> add(@Valid @RequestBody UserDto userSignUpRequest) {
         userService.saveUser(userSignUpRequest);
         log.info("User added: " + userSignUpRequest.getUsername());
+
+        // send email
+        String subject = "Registration Successful";
+        String text = "Congratulations, you have successfully registered on the site!";
+        emailService.sendEmail(userSignUpRequest.getEmail(), subject, text);
+
         return ResponseEntity.ok(userSignUpRequest);
     }
 
