@@ -31,7 +31,7 @@ public class UserDetailsServiceImplTest extends BaseServiceTest {
     @Transactional
     public void testLoadUserByUsername_WhenUserExists_ShouldReturnUserDetails() {
         // Given
-        User user = createUser("test1", "test123", Role.ROLE_USER);
+        User user = createUser("test1", "test123", Role.ROLE_USER, "testUser@gmail.com");
         userRepository.save(user);
 
         // When

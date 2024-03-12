@@ -39,6 +39,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+
 import com.example.backend.dto.UserDto;
 import com.example.backend.entity.Role;
 import com.example.backend.entity.User;
@@ -47,6 +48,7 @@ import com.example.backend.security.JwtGenerator;
 import com.example.backend.security.UserDetailsServiceImpl;
 import com.example.backend.security.WebSecurityConfig;
 import com.example.backend.services.AuthenticationServiceImpl;
+import com.example.backend.services.EmailServiceImpl;
 import com.example.backend.services.UserServiceImpl;
 import com.example.backend.utils.UserTestUtils;
 
@@ -64,6 +66,9 @@ public class LogInControllerIntegrationTest {
     @Autowired
     AuthenticationServiceImpl authenticationService;
 
+    @MockBean
+    EmailServiceImpl emailService;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -76,10 +81,10 @@ public class LogInControllerIntegrationTest {
     @BeforeEach
     public void setup() {
         // Given
-        userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER);
-        userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN);
+        userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER,"testUser@gmail.com");
+        userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN,"testAdmin@gmail.com");
         userList = UserTestUtils.createUsers(2, Role.ROLE_USER);
-        userList.add(UserTestUtils.createUser("user3", "password3", Role.ROLE_ADMIN));
+        userList.add(UserTestUtils.createUser("user3", "password3", Role.ROLE_ADMIN,"testUser3@gmail.com"));
     }
 
     @Test

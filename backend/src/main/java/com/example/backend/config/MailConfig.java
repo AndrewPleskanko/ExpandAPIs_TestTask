@@ -9,11 +9,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 public class MailConfig {
-    private final String host = System.getProperty("spring.mail.host");
-    private final int port = Integer.parseInt(System.getProperty("spring.mail.port"));
-    private final String username = System.getProperty("spring.mail.username");
-    private final String password = System.getProperty("spring.mail.password");
-
+    private final String host = System.getProperty("spring.mail.host", "defaultHost");
+    private final int port = Integer.parseInt(System.getProperty("spring.mail.port", "587"));
+    private final String username = System.getProperty("spring.mail.username", "defaultUsername");
+    private final String password = System.getProperty("spring.mail.password", "defaultPassword");
 
     @Bean
     public JavaMailSender getJavaMailSender() {

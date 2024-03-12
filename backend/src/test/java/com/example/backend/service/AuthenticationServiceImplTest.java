@@ -35,8 +35,8 @@ class AuthenticationServiceImplTest extends BaseServiceTest {
     @BeforeEach
     public void setup() {
         // Given
-        userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER);
-        userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN);
+        userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER, "testUser@gmail.com");
+        userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN,"testAdmin@gmail.com");
         mapper = new ObjectMapper();
     }
 

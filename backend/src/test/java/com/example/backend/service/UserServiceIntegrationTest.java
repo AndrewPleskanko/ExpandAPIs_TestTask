@@ -46,9 +46,9 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
     void setUp() {
         //Given
         user1 = new User(1L, "test1", "test123", "presF@gmail.com", Role.ROLE_USER);
-        user2 = new User(2L, "test2", "test234","test2@gmail.com", Role.ROLE_ADMIN);
-        userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER);
-        userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN);
+        user2 = new User(2L, "test2", "test234", "test2@gmail.com", Role.ROLE_ADMIN);
+        userDtoUser = UserTestUtils.createUserDto("john", "123", Role.ROLE_USER, "testUser@gmail.com");
+        userDtoAdmin = UserTestUtils.createUserDto("admin", "admin", Role.ROLE_ADMIN, "testAdmin@gmail.com");
         userList = Arrays.asList(user1, user2);
     }
 
@@ -67,6 +67,8 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
         assertEquals(user1.getId(), result.getId());
         assertEquals(user1.getUsername(), result.getUsername());
         assertEquals(user1.getPassword(), result.getPassword());
+        assertEquals(user1.getEmail(), result.getEmail());
+        assertEquals(user1.getRole(), result.getRole());
     }
 
     @Test
@@ -86,6 +88,7 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
         assertNotNull(firstUser.getId());
         assertEquals(userDtoUser.getUsername(), firstUser.getUsername());
         assertEquals(userDtoUser.getRole(), firstUser.getRole());
+        assertEquals(userDtoUser.getEmail(), firstUser.getEmail());
         assertTrue(passwordEncoder.matches(userDtoUser.getPassword(), firstUser.getPassword()));
     }
 
@@ -119,6 +122,7 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
         // Then
         assertEquals(user1.getUsername(), firstUser.getUsername());
         assertEquals(user1.getRole(), firstUser.getRole());
+        assertEquals(user1.getEmail(), firstUser.getEmail());
         assertEquals(user1.getPassword(), firstUser.getPassword());
     }
 }

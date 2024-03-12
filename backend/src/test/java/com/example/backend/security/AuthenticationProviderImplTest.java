@@ -36,7 +36,8 @@ public class AuthenticationProviderImplTest extends BaseServiceTest {
 
     @BeforeEach
     public void setUp() {
-        user = createUser("test1", "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq", Role.ROLE_USER);
+        user = createUser("test1", "$2a$10$5vvbROzmmXGkfPVaZTyNjODxOEBkobazyMcGWaoSKugSaMLSER0Pq",
+                Role.ROLE_USER, "testUser@gmail.com");
     }
 
     @Test
