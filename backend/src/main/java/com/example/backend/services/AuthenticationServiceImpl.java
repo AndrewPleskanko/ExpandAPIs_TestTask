@@ -41,6 +41,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         log.info("Generated token for user: " + userDto.getUsername());
         return new AuthResponseDto(token);
     }
-
-
 }

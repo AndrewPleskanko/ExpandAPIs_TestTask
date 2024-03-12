@@ -4,22 +4,19 @@ import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import java.util.Objects;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import com.example.backend.services.EmailServiceImpl;
 
 public class EmailServiceImplTest {
 
     @Mock
-    private JavaMailSender mailSender;
+    private JavaMailSenderImpl mailSender;
 
     private EmailServiceImpl emailService;
 
