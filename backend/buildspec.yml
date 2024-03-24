@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Moving to backend directory...
+      - cd backend
+  build:
+    commands:
+      - echo Packaging JAR file...
+      - mvn clean package
+  post_build:
+    commands:
+      - echo Build complete.
+artifacts:
+  files:
+    - target/contacts-app.jar
+  discard-paths: yes
