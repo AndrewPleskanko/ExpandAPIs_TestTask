@@ -13,5 +13,5 @@ phases:
       - echo Build complete.
 artifacts:
   files:
-    - target/contacts-app.jar
+    - backend/target/contacts-app.jar
   discard-paths: yes
