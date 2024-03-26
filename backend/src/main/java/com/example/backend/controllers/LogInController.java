@@ -35,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://main.dc9vhx3nua2to.amplifyapp.com:4200")
 public class LogInController {
 
     private final UserServiceImpl userService;

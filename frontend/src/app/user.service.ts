@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8080/users';
+  private apiUrl = 'http://javapetproject-env.eba-393pcj8c.eu-north-1.elasticbeanstalk.com/users';
 
   constructor(private http: HttpClient) {
   }
