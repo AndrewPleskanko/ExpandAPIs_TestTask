@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://javapetproject-env.eba-393pcj8c.eu-north-1.elasticbeanstalk.com/users';
+  private apiUrl = 'https://www.axiss.software/users';
 
   constructor(private http: HttpClient) {
   }
@@ -23,7 +23,7 @@ export class UserService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.get(`${this.apiUrl}/all`, { headers });
+    return this.http.get(`${this.apiUrl}/all`, {headers});
   }
 }
 
